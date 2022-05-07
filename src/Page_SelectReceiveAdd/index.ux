@@ -1,0 +1,184 @@
+<template>
+
+	<div class="container">
+
+		<div class="firstListsItemCon">
+			<text class="greyText groupText">{{defaultAdd.name}}</text>
+			<div for="defaultAdd.group" onclick="back">
+				<div class="listItemCon">
+					<div>
+						<text class="normalText">{{$item.name}}</text>
+						<text class="normalText">{{$item.phone}}</text>
+					</div>
+					<text class="greyText centerText">{{$item.mainAddress}}</text>
+					<text class="greyText">{{$item.detailAddress}}</text>
+				</div>
+			</div>
+		</div>
+		<div class="sepMoreDefault"></div>
+		<div class="groupCon" for="{{addGroups}}">
+			<div class="listsItemCon">
+				<div class="groupText">
+					<text class="greyText moreAddCon">{{$item.name}}</text>
+					<text class="newAddText" onclick="direct()">新增地址</text>
+				</div>
+
+				<div for="(index, item) in $item.group" onclick="back">
+					<div class="listItemCon">
+						<div>
+							<text class="normalText">{{item.name}}</text>
+							<text class="normalText">{{item.phone}}</text>
+						</div>
+						<text class="greyText centerText">{{item.mainAddress}}</text>
+						<text class="greyText">{{item.detailAddress}}</text>
+						<div show="{{index!=($item.group.length-1)}}" class="lineSep"></div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</template>
+
+<style>
+	.moreAddCon {
+		width: 610px;
+	}
+
+	.centerText {
+		margin: 03.4px 0 3.6px;
+	}
+
+	.groupCon {
+		margin-top: 29.3px;
+		padding: 0 33px;
+	}
+
+	.groupText {
+		margin: 16.7px 0;
+	}
+
+	.lineSep {
+		width: 684px;
+		height: 0.5px;
+		opacity: 0.2;
+		margin: 25px 0px 18px 0px;
+		background-color: #000000;
+	}
+
+	.sepMoreDefault {
+		width: 750px;
+		height: 16.7px;
+		background-color: #F5F5F5;
+		margin-top: 21.9px;
+	}
+
+	.greyText {
+		color: #1A1A1A;
+		opacity: 0.5;
+		font-size: 27.1px;
+		height: 34.9px;
+	}
+
+	.normalText {
+		color: #1A1A1A;
+		font-size: 31.3px;
+		height: 40.6px;
+	}
+
+	.newAddText {
+		color: #FF7500;
+		font-size: 27.1px;
+		height: 34.9px;
+		width: 140px;
+	}
+
+	.listsItemCon {
+		flex-direction: column;
+	}
+
+	.firstListsItemCon {
+		flex-direction: column;
+		margin-top: 30.2px;
+		padding: 0 33px;
+	}
+
+	.listItemCon {
+		flex-direction: column;
+		margin-top: 8px;
+	}
+
+	.newAdd {
+		width: 600px;
+	}
+
+	.sliceImg {
+		margin-right: 33.3px;
+	}
+
+	.titleNew {
+		width: 100%;
+		height: 100px;
+		font-size: 37.5px;
+		color: #1A1A1A;
+		width: 100%;
+		padding-top: 23.4px;
+	}
+
+	.container {
+		flex-direction: column;
+	}
+</style>
+
+<script>
+	import router from "@system.router"
+	export default {
+		data: {
+			//默认地址
+			defaultAdd: {
+				name: "默认地址",
+				group: [{
+					name: "寒梅梅",
+					phone: "18812345678",
+					mainAddress: "广东省深圳市",
+					detailAddress: "龙岗区坂田天安云谷1栋A座1702室",
+				}]
+			},
+			//更多地址
+			addGroups: [{
+				name: "更多地址",
+				group: [{
+					name: "李雷",
+					phone: "18812345678",
+					mainAddress: "广东省东莞市",
+					detailAddress: "太和圩路利利时装商店",
+				}, {
+					name: "李雷",
+					phone: "18812345678",
+					mainAddress: "广东省东莞市",
+					detailAddress: "太和圩路利利时装商店",
+				}]
+			}]
+		},
+		//初始化
+		onInit() {
+			this.$page.setTitleBar({
+				text: '选择收货地址',
+				textColor: '#1a1a1a',
+				backgroundColor: '#f2f2f2',
+				menu: false
+			})
+		},
+		//跳转页面
+		direct() {
+			router.push({
+				uri: 'Page_NewAddress',
+			});
+		},
+		back() {
+			console.debug("back!");
+		}
+	}
+</script>

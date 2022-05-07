@@ -1,0 +1,271 @@
+<import name="goodbasic" src="./component/c_goodbasic"></import>
+<import name="specfic" src="./component/c_specfic"></import>
+<import name="comments" src="./component/c_comments"></import>
+<import name="recommend" src="./component/c_recommend"></import>
+<import name="goodintroduced" src="./component/c_goodintroduced"></import>
+<template>
+	<div class="malldetail-content">
+		<goodbasic data="{{goodbasic}}"></goodbasic>
+		<specfic data="{{specficlist}}"></specfic>
+		<div class="malldetail-black"></div>
+		<comments data="{{comment}}"></comments>
+		<div class="malldetail-black"></div>
+		<recommend list="{{recommendgood}}"></recommend>
+		<div class="malldetail-black"></div>
+		<goodintroduced list="{{goodintroduced}}"></goodintroduced>
+		<div class="malldetail-black"></div>
+		<text class="malldetail-imgdetail-title">图文详情</text>
+		<image for="{{goodbasic.goodImgList}}" class="malldetail-imgdetail-img" src="{{$item.url}}"></image>
+		<div class="malldetail-black"></div>
+		<text class="malldetail-imgdetail-title">{{notes.title}}</text>
+		<div class="malldetail-flex-h" for="{{notes.detail}}">
+			<text class="malldetail-return-title">{{$item.title}}</text>
+			<text class="malldetail-return-detail">{{$item.detail}}</text>
+		</div>
+		<div class="malldetail-buy">
+			<image class="malldetail-shopcart-img" onclick="shopcart" src="./img/shopcart.png"></image>
+			<image if="{{!isCollect}}" class="malldetail-star-img" src="./img/star.png" onclick="collection('true')"></image>
+			<image else class="malldetail-star-img" src="./img/star-success.png" onclick="collection('false')"></image>
+			<text class="malldetail-shopcart-add" onclick="shopcartFun">加入购物车</text>
+			<text class="malldetail-now-buy" onclick="nowBuy">立即购买</text>
+		</div>
+	</div>
+</template>
+
+<style>
+	.malldetail-flex-h {
+		flex-direction: column;
+	}
+
+	.malldetail-content {
+		flex-direction: column;
+		padding-bottom: 92px;
+	}
+
+	.malldetail-black {
+		height: 17px;
+		background-color: #f2f2f2;
+	}
+
+	.malldetail-imgdetail-title {
+		margin: 24.3px 33px;
+		font-size: 31.3px;
+		color: #1a1a1a;
+	}
+
+	.malldetail-imgdetail-img {
+		width: 750px;
+		height: 1207px;
+	}
+
+	.malldetail-return-title {
+		margin: 0px 33px 7.5px 33px;
+		font-size: 31.3px;
+		color: #1a1a1a;
+	}
+
+	.malldetail-return-detail {
+		margin: 0px 33px 32.8px 33px;
+		color: #808080;
+		font-size: 27.1px;
+	}
+
+	.malldetail-buy {
+		position: fixed;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+		border-color: #cccccc;
+		background-color: #ffffff;
+		border-top-width: 0.5px;
+		justify-content: flex-end;
+		align-items: center;
+	}
+
+	.malldetail-shopcart-img {
+		width: 50px;
+		height: 50px;
+		margin: 0px 50px 0px 33px;
+	}
+
+	.malldetail-star-img {
+		width: 50px;
+		height: 50px;
+		margin: 0px 33.3px 0px 0px;
+	}
+
+	.malldetail-shopcart-add {
+		padding: 25px 56px;
+		background-color: #ffb700;
+		font-size: 31.3px;
+		color: #ffffff;
+	}
+
+	.malldetail-now-buy {
+		padding: 25px 68px;
+		background-color: #ff7500;
+		font-size: 31.3px;
+		color: #ffffff;
+	}
+</style>
+
+<script>
+	import prompt from "@system.prompt";
+	import router from "@system.router";
+	module.exports = {
+		data: {
+			isCollect: false, //是否收藏该商品
+			//商品基本信息
+			goodbasic: {
+				goodName: "Sandro Moscoloni2018夏季新款显瘦直筒裙小个子V领针织连衣裙女", //商品名称
+				goodPrice: "909", //商品价格
+				goodOldPrice: "416", //商品原价
+				goodFree: "4张优惠券，共￥220", //商品优惠卷信息
+				goodFreeDetail: "购买最多可获得99个，会员等级越高**币越多", //商品优惠详情
+				//商品图片
+				goodImgList: [{
+					url: "./TO_DELETE/large1.jpg" //商品图片路径
+				},
+				{
+					url: "./TO_DELETE/large2.jpg"
+				}
+				]
+			},
+			//商品规格信息
+			specficlist: {
+				//规格
+				specfic: [{
+					select: true, //商品当前选中的规格
+					value: "网格" //规格名称
+				}, {
+					select: false,
+					value: "文字"
+				}, {
+					select: false,
+					value: "彩圈"
+				}],
+				//尺寸
+				size: [{
+					select: true, //商品当前选中的尺寸
+					value: "X" //尺寸名称
+				}, {
+					select: false,
+					value: "M"
+				}, {
+					select: false,
+					value: "L"
+				}, {
+					select: false,
+					value: "XL"
+				}]
+			},
+			//商品评论信息
+			comment: {
+				//评论关键字列表
+				keywordList: ["舒适", "透气", "时尚美观"],
+				//评论详情列表
+				detail: [{
+					userName: "Jiaqi",//用户评论名称
+					userIcon: "./TO_DELETE/user.png",//用户评论头像
+					commentsText: "相对而言，对白T恤一字领独特，长短页非常合适。相对而言，对白T恤一字领独特，长短也非常合适。",//用户评论文字
+					commentsImg: "./TO_DELETE/good4.png"//用户评论图片
+				}]
+			},
+			//推荐商品
+			recommendgood: [{
+				icon: "./TO_DELETE/good1.png",//推荐商品图片
+				title: "BLUEerror秋季七分袖t恤",//推荐商品名称
+				price: "￥196",//推荐商品价格
+				id: "1"//推荐商品id
+			},
+			{
+				icon: "./TO_DELETE/good2.png",
+				title: "俏皮套装女两件套小女孩最爱",
+				price: "￥339.98",
+				id: "3"
+			},
+			{
+				icon: "./TO_DELETE/good3.png",
+				title: "韩都衣舍2018韩版女装潮流上衣",
+				price: "￥188",
+				oldPrice: "￥398",
+				id: "4"
+			}
+			],
+			//商品介绍
+			goodintroduced: [{
+				title: "产地",
+				value: "中国"
+			},
+			{
+				title: "风格",
+				value: "轻熟风"
+			},
+			{
+				title: "流行元素",
+				value: "透视"
+			}
+			],
+			//商家备注
+			notes: {
+				//备注标题
+				title: "咨询与售后",
+				//备注详情
+				detail: [{
+					title: "退货说明",
+					detail: "该商品支持7天无理由退货，请您放心购买"
+				},
+				{
+					title: "换货说明",
+					detail: "该商品支持换货，订单签收7天内可申请换货。"
+				},
+				{
+					title: "尺码表上的尺码标准吗？",
+					detail: "我们所售商品尺寸均为人工测量，可能会存在1-2cm的正常误差范围。"
+				}
+				]
+			}
+		},
+		//收藏与取消收藏
+		collection: function (type) {
+			if (type === "true") {
+				prompt.showToast({
+					message: "收藏成功"
+				});
+				this.isCollect = true;
+			} else {
+				prompt.showToast({
+					message: "取消收藏成功"
+				});
+				this.isCollect = false;
+			}
+		},
+		//进入确认订单页面
+		shopcart: function () {
+			router.push({
+				uri: "Page_Orders"
+			});
+		},
+		//加入购物车,提示
+		shopcartFun: function () {
+			prompt.showToast({
+				message: "成功加入购物车"
+			});
+		},
+		//立即购买，进入确认订单页面
+		nowBuy: function () {
+			router.push({
+				uri: "Page_Orders"
+			});
+		},
+		//初始化
+		onInit() {
+			this.$page.setTitleBar({
+				text: "商品详情",
+				textColor: "#1a1a1a",
+				backgroundColor: "#f2f2f2",
+				menu: false
+			});
+		}
+	};
+</script>

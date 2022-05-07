@@ -1,0 +1,89 @@
+<template>
+  <list class="content">
+    <list-item type="listItem" for="{{list}}" class="content_item flex_direction_column" onclick="toDetail($item)">
+      <image class="item_image" src="{{$item.image}}"></image>
+      <text class="item_title">{{$item.title}}</text>
+      <div>
+        <text class="item_real_price">￥{{$item.realPrice}}</text>
+        <text class="item_benefit">{{$item.benefit}}</text>
+        <stack class="stack">
+          <text if="{{$item.primeCost}}" class="item_prime_cost">单买价￥{{$item.primeCost}}</text>
+        </stack>
+
+      </div>
+    </list-item>
+  </list>
+</template>
+
+<style>
+  .content {
+    columns: 2;
+    padding: 33px 33px 0 0;
+  }
+
+  .content_item {
+    width: 333.3px;
+    margin-bottom: 33px;
+    margin-left: 33px;
+  }
+
+  .item_image {
+    width: 333.3px;
+    height: 333.3px;
+    border-radius: 8px;
+  }
+
+  .item_title {
+    padding: 16.7px 0px 8px 0px;
+    font-size: 27.1px;
+    color: #1a1a1a;
+  }
+
+  .item_real_price {
+    margin-right: 20px;
+    color: #fa2a2d;
+    font-size: 20.8px;
+  }
+
+  .item_benefit {
+    margin-right: 20px;
+    font-size: 20.8px;
+    color: #ff7500;
+  }
+
+  .item_prime_cost {
+    font-size: 20.8px;
+    text-decoration: line-through;
+    color: #8d8d8d;
+  }
+
+  .stack {
+    width: 150px;
+  }
+
+  .flex_direction_column {
+    flex-direction: column;
+  }
+</style>
+
+<script>
+  import router from '@system.router';
+  module.exports = {
+    data: {
+      props: [
+        'list',
+      ]
+    },
+    onInit() {
+    },
+
+    toDetail(item) {
+      router.push({
+        uri: '/Page_MallDetail',
+        params: { item: item }
+      })
+    }
+
+
+  }
+</script>

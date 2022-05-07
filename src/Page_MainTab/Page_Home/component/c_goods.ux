@@ -1,0 +1,60 @@
+<import name='noswiper' src='./c_item_container_fixed'></import>
+<import name="listmall" src="./c_list_mall"></import>
+<import name="sola" src="./c_sola"></import>
+<import name="banimg" src="./c_banner_image"></import>
+
+<template>
+	<!-- template里只能有一个根节点 -->
+	<div class="container">
+
+		<!-- 第一部分：banner -->
+		<banimg list="{{home.banner}}"></banimg>
+
+		<!-- 第二部分：3个非滑动的ItemContainer -->
+		<noswiper list="{{home.itemcontainer1.data1}}" num="{{home.itemcontainer1.noswipernum2}}" banner="{{home.itemcontainer1.banner}}"></noswiper>
+		<noswiper list="{{home.itemcontainer2.data1}}" num="{{home.itemcontainer2.noswipernum3}}" banner="{{home.itemcontainer2.banner}}"></noswiper>
+		<noswiper list="{{home.itemcontainer3.data1}}" num="{{home.itemcontainer3.noswipernum4}}" banner="{{home.itemcontainer3.banner}}"></noswiper>
+
+		<div class="div-line">
+		</div>
+
+		<!-- 第三部分：2个组合列表，重写为了listmall -->
+		<listmall banner="{{home.listmall1.mallbanner}}" list="{{home.listmall1.malldata}}" num="{{home.listmall1.mallnum2}}"></listmall>
+		<listmall list="{{home.listmall2.malldata}}" num="{{home.listmall2.mallnum3}}"></listmall>
+
+		<div class="div-line"></div>
+
+		<listmall banner="{{home.listmall3.mallbanner}}" list="{{home.listmall3.malldata}}" num="{{home.listmall3.mallnum1}}"></listmall>
+		<listmall list="{{home.listmall4.malldata}}" num="{{home.listmall4.mallnum4}}"></listmall>
+
+		<div class="div-line"></div>
+
+		<!-- 第四部分：单独1个商品的列表 -->
+		<sola banner="{{home.sola.solabanner}}" list="{{home.sola.solalist}}"></sola>
+	</div>
+</template>
+
+<style>
+
+.container {
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	align-items: center;
+}
+
+.div-line {
+	background-color: #ffffff;
+	height: 0px;
+	width: 100%;
+}
+
+</style>
+
+<script>
+module.exports = {
+	data: {
+		props: ['home'],
+	}
+}
+</script>

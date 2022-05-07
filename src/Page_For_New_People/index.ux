@@ -1,0 +1,46 @@
+<import name="goodslist" src="./component/c_goods_list"></import>
+<template>
+  <!-- template里只能有一个根节点 -->
+  <div class="container">
+    <goodslist list="{{allTradeList}}"></goodslist>
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+  }
+</style>
+
+<script>
+
+  module.exports = {
+    protected: {
+      item: ''     //item 为将接收的路由参数
+    },
+    public: {
+      allTradeList: [
+        { benefit: '包邮', realPrice: '988', primeCost: '399', image: 'TO_DELETE/result1.jpg', title: 'OTMASTER2018夏装新款' },
+        { benefit: '省99', realPrice: '178', primeCost: '', image: 'TO_DELETE/result2.png', title: '2018夏新款bf风下身...' },
+        { benefit: '省99', realPrice: '299', primeCost: '', image: 'TO_DELETE/result3.jpg', title: '白色中长款宽松大t恤女夏' },
+        { benefit: '包邮', realPrice: '178', primeCost: '588', image: 'TO_DELETE/result4.png', title: '绒美【TX04048600】高...' },
+        { benefit: '省99', realPrice: '988', primeCost: '399', image: 'TO_DELETE/result5.jpg', title: '2018DSDSA夏装新款女' },
+        { benefit: '包邮', realPrice: '299', primeCost: '', image: 'TO_DELETE/result6.jpg', title: '夏装美丽新款连衣裙' },
+        { benefit: '包邮', realPrice: '988', primeCost: '399', image: 'TO_DELETE/result1.jpg', title: 'OTMASTER2018夏装新款' },
+        { benefit: '省99', realPrice: '178', primeCost: '588', image: 'TO_DELETE/result2.png', title: '2018夏新款bf风下身...' },
+        { benefit: '包邮', realPrice: '299', primeCost: '499', image: 'TO_DELETE/result3.jpg', title: '白色中长款宽松大t恤女夏' },
+        { benefit: '省99', realPrice: '178', primeCost: '588', image: 'TO_DELETE/result4.png', title: '绒美【TX04048600】高...' },
+        { benefit: '包邮', realPrice: '988', primeCost: '399', image: 'TO_DELETE/result5.jpg', title: '2018DSDSA夏装新款女' },
+        { benefit: '包邮', realPrice: '299', primeCost: '388', image: 'TO_DELETE/result6.jpg', title: '夏装美丽新款连衣裙' },
+      ]
+    },
+    onInit() {
+      this.$page.setTitleBar({
+        text: '新人专享',
+        textColor: '#1a1a1a',
+        backgroundColor: '#f2f2f2',
+        menu: true
+      })
+    }
+  }
+</script>

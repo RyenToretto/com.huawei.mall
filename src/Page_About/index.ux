@@ -1,0 +1,131 @@
+<template>
+	<div class="center_container">
+		<div class="center_container">
+			<!-- 关于页面，需要使用应用图标 -->
+			<image class="logo_style" src="/Common/logo.png"></image>
+			<text id="app_name" class="text_appname">{{header.appName}}</text>
+			<text id="app_version" class="text_grey">{{header.appVersion}}</text>
+		</div>
+		<list class="center_container" style="height:600px;">
+		</list>
+		<div class="center_container bottom_con">
+			<div>
+				<text class="text_link" @click="openCodeLicenseLink('termsLink1')">{{agreement.termsLink[0].name}}</text>
+				<div class="text_whitespace"> </div>
+				<text class="text_link" @click="openCodeLicenseLink('termsLink2')">{{agreement.termsLink[1].name}}</text>
+			</div>
+			<text class="text_copy">{{rightinfo.copyrightInfo}}</text>
+		</div>
+	</div>
+</template>
+
+<style>
+.text_whitespace {
+	width: 20px;
+}
+
+.bottom_con {
+	position: fixed;
+	bottom: 33px;
+	flex-direction: column;
+	align-items: center;
+}
+
+.text_appname {
+	color: rgb(26, 26, 26);
+	font-size: 31px;
+	margin-top: 22px;
+	margin-bottom: 13px;
+}
+
+.text_grey {
+	color: rgba(26, 26, 26, 0.5);
+	font-size: 27.1px;
+}
+
+.text_copy {
+	color: rgba(26, 26, 26, 0.5);
+	font-size: 21px;
+}
+
+.text_link {
+	color: #005BBA;
+	font-size: 20.8px;
+}
+
+.list_item_con {
+	margin-top: 30px;
+	margin-left: 100px;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+}
+
+.center_container {
+	width: 100%;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+}
+
+.logo_style {
+	height: 150px;
+	width: 150px;
+	margin-top: 117px;
+	border-radius: 30px;
+}
+</style>
+
+<script>
+import router from "@system.router"
+import app from "@system.app"
+module.exports = {
+	//初始化函数
+	onInit() {
+		this.$page.setTitleBar({
+			text: '关于',
+			textColor: '#1a1a1a',
+			backgroundColor: '#f2f2f2',
+			menu: false
+		})
+	},
+	data: {
+		// 关于页面About入参：
+		header: {
+			appName: app.getInfo().name,
+			appVersion: app.getInfo().versionName,
+		},
+		//协议
+		agreement: {
+			termsLink: [{
+				name: "xx用户协议",
+				url: "https://www.baidu.com"
+			}, {
+				name: "xx隐私协议",
+				url: "https://www.baidu.com"
+			}],
+		},
+		//版权所有
+		rightinfo: {
+			copyrightInfo: "版权所有@2013-2018xx有限公司保留一切权利",
+		},
+	},
+	//跳转函数
+	routerRedirect(url) {
+		router.push({
+			uri: url
+		});
+	},
+	//具体跳转页面
+	openCodeLicenseLink: function(e) {
+		//应该根据入参判断
+		if (e === "openCodeLicense") {
+			this.routerRedirect(this.agreement.openCodeLicense.url);
+		} else if (e === "termsLink1") {
+			this.routerRedirect(this.agreement.termsLink[0].url);
+		} else {
+			this.routerRedirect(this.agreement.termsLink[1].url);
+		}
+	}
+}
+</script>

@@ -1,0 +1,109 @@
+{
+  "package": "com.huawei.mall",
+  "name": "kmall",
+  "versionName": "1.0.1",
+  "versionCode": 1,
+  "icon": "/Common/logo.png",
+  "minPlatformVersion": 1040,
+  "features": [
+    {
+      "name": "system.prompt"
+    },
+    {
+      "name": "system.router"
+    },
+    {
+      "name": "system.device"
+    },
+    {
+      "name": "system.image"
+    }
+  ],
+  "config": {},
+  "router": {
+    "entry": "Page_MainTab",
+    "pages": {
+      "Page_MainTab": {
+        "component": "index"
+      },
+      "Page_RecentSearch": {
+        "component": "index"
+      },
+      "Page_MallScreening": {
+        "component": "index"
+      },
+      "Page_MallDetail": {
+        "component": "index"
+      },
+      "Page_Orders": {
+        "component": "index"
+      },
+      "Page_NewAddress": {
+        "component": "index"
+      },
+      "Page_SelectReceiveAdd": {
+        "component": "index"
+      },
+      "Page_About": {
+        "component": "index"
+      },
+      "Page_TradeManagement": {
+        "component": "index",
+        "path": "/Page_TradeManagement"
+      },
+      "Page_For_New_People": {
+        "component": "index",
+        "path": "/Page_For_New_People"
+      },
+      "Page_Evaluate": {
+        "component": "index",
+        "path": "/Page_Evaluate"
+      },
+      "page_No_Goods": {
+        "component": "index",
+        "path": "/page_No_Goods"
+      },
+      "Page_No_Orders": {
+        "component": "index",
+        "path": "/Page_No_Orders"
+      },
+      "Page_Account": {
+        "component": "index",
+        "path": "/Page_Account"
+      }
+    }
+  },
+  "display": {
+    "menu": true,
+    "pages": {
+      "Page_About": {
+        "titleBar": true,
+        "menu": false
+      },
+      "Page_MallDetail": {
+        "titleBar": true,
+        "menu": false
+      },
+      "Page_NewAddress": {
+        "titleBar": true,
+        "menu": false
+      },
+      "Page_Orders": {
+        "titleBar": true,
+        "menu": false
+      },
+      "Page_SelectReceiveAdd": {
+        "titleBar": true,
+        "menu": false
+      },
+      "Page_MallScreening": {
+        "titleBar": true,
+        "menu": false
+      },
+      "Page_RecentSearch": {
+        "titleBar": false,
+        "menu": false
+      }
+    }
+  }
+}

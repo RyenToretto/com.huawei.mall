@@ -1,0 +1,168 @@
+<template>
+	<!-- template里只能有一个根节点 -->
+	<div class="container">
+		<div class="newInfo">
+			<div class="itemsCon" for="{{items}}">
+				<text class="leftLabel">{{$item.leftLabel}}</text>
+				<div class="containDiv">
+          <input class="inputPlaceholder" placeholder="{{$item.rightInfo}}"></input>
+          <div class="rightLine"></div>
+        </div>
+			</div>
+			<div class="defaultCon" @click="defaultFunc(0)">
+				<text style="width:667px;color: #1a1a1a;">设置默认地址</text>
+				<div class="defaultIconOff" if="{{switchicon==1?false:true}}"></div>
+				<div class="defaultIconOn" if="{{switchicon=='0'?false:true}}"></div>
+			</div>
+		</div>
+		<div class="container ">
+			<div class="centerConfirm">
+				<input type="button" class="confirmBtn" id="confirm" value="确定" onclick="confirmFunc()"> </input>
+			</div>
+		</div>
+	</div>
+</template>
+
+<style>
+.containDiv{
+  flex-direction: column;;
+}
+.rightLine{
+  height: 0.5px;
+  background-color: #000000;
+  width: 100%;
+  opacity: 0.2;
+}
+.centerConfirm {
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  align-self: center;
+  flex-direction: column;
+}
+
+.defaultCon {
+  margin-bottom: 20px;
+  width: 100%;
+  height: 100px;
+  line-height: 42px;
+}
+
+.defaultIconOn {
+  height: 42px;
+  width: 76px;
+  background-image: url(./img/on.png);
+  margin-top: 28px;
+}
+.defaultIconOff {
+  height: 42px;
+  width: 76px;
+  background-image: url(./img/lightoff.png);
+  margin-top: 28px;
+}
+.locateIcon {
+  width: 50px;
+  height: 50px;
+}
+
+.itemsCon {
+  height: 87.8px;
+}
+
+.inputPlaceholder {
+  height: 40.6px;
+  font-size: 31.3px;
+  width: 582px;
+  margin-top: 25.8px;
+  color: #1a1a1a;
+  padding-bottom: 3px;
+}
+
+.leftLabel {
+  width: 142.6px;
+  color: #1a1a1a;
+}
+
+.newInfo {
+  line-height: 40.6px;
+  flex-direction: column;
+  padding-top: 45.3px;
+  width: 100%;
+  height: 400px;
+  font-size: 31.3px;
+  color: #1a1a1a;
+}
+
+.confirmBtn {
+  font-size: 31.7px;
+  color: #ffffff;
+  line-height: 40.6px;
+  width: 375px;
+  border-radius: 8.3px;
+  height: 66.7px;
+  background-color: #ff7500;
+  position: fixed;
+  bottom: 33px;
+  left: 189px;
+}
+
+.container {
+  flex-direction: column;
+  padding: 0 33px;
+}
+
+</style>
+
+<script>
+import router from "@system.router";
+let defaultCount = 0;
+module.exports = {
+  //点击是否设置为默认地址
+  defaultFunc(e) {
+    if (e === defaultCount) {
+      this.switchicon = 1;
+      defaultCount = 1;
+    } else {
+      this.switchicon = 0;
+      defaultCount = 0;
+    }
+    return defaultCount;
+  },
+  //初始化
+  onInit() {
+		this.$page.setTitleBar({
+			text: '新增地址',
+			textColor: '#1a1a1a',
+			backgroundColor: '#f2f2f2',
+			menu: false
+		})
+	},
+  data: {
+    //新增地址列表信息
+    items: [
+      {
+        leftLabel: "收件人",
+        rightInfo: "姓名",
+        locate: false
+      },
+      {
+        leftLabel: "电话",
+        rightInfo: "手机号码",
+        locate: false
+      },
+      {
+        leftLabel: "收货地址",
+        rightInfo: "请填写省-市-区-街道-楼-门牌号",
+        locate: false
+      }
+    ],
+    //是否设为默认地址图标
+    switchicon: defaultCount
+  },
+  //确定新增地址
+  confirmFunc() {
+    router.back();
+  }
+};
+</script>

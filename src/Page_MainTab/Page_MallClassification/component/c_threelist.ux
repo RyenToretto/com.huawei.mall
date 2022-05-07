@@ -1,0 +1,89 @@
+<template>
+	<div class="threelist-content">
+    <text class="threelist-text">{{list.title}}</text>
+		<div>
+			<div class="threelist-box" onclick="detail(list.data[0])">
+				<image class="threelist-img" src="{{list.data[0].icon}}"></image>
+				<text class="threelist-title">{{list.data[0].title}}</text>
+			</div>
+			<div class="threelist-box" onclick="detail(list.data[1])">
+				<image class="threelist-img" src="{{list.data[1].icon}}"></image>
+				<text class="threelist-title">{{list.data[1].title}}</text>
+			</div>
+			<div class="threelist-box" onclick="detail(list.data[2])">
+				<image class="threelist-img" src="{{list.data[2].icon}}"></image>
+				<text class="threelist-title">{{list.data[2].title}}</text>
+			</div>
+		</div>
+		<div>
+			<div class="threelist-box" onclick="detail(list.data[3])">
+				<image class="threelist-img" src="{{list.data[3].icon}}"></image>
+				<text class="threelist-title">{{list.data[3].title}}</text>
+			</div>
+			<div class="threelist-box" onclick="detail(list.data[4])">
+				<image class="threelist-img" src="{{list.data[4].icon}}"></image>
+				<text class="threelist-title">{{list.data[4].title}}</text>
+			</div>
+			<div class="threelist-box" onclick="detail(list.data[5])">
+				<image class="threelist-img" src="{{list.data[5].icon}}"></image>
+				<text class="threelist-title">{{list.data[5].title}}</text>
+			</div>
+		</div>
+		<div>
+			<div class="threelist-box" onclick="detail(list.data[6])">
+				<image class="threelist-img" src="{{list.data[6].icon}}"></image>
+				<text class="threelist-title">{{list.data[6].title}}</text>
+			</div>
+			<div class="threelist-box" onclick="detail(list.data[7])">
+				<image class="threelist-img" src="{{list.data[7].icon}}"></image>
+				<text class="threelist-title">{{list.data[7].title}}</text>
+			</div>
+			<div class="threelist-box" onclick="detail(list.data[8])">
+				<image class="threelist-img" src="{{list.data[8].icon}}"></image>
+				<text class="threelist-title">{{list.data[8].title}}</text>
+			</div>
+		</div>
+	</div>
+</template>
+
+<style>
+.threelist-content {
+	flex-direction: column;
+}
+.threelist-text{
+  margin:53px 0px 0px 33.3px;
+  font-size:27.1px;
+  color:#1a1a1a;
+}
+.threelist-box {
+	flex-direction: column;
+	align-items: center;
+	padding: 32.8px 16.7px 20.2px 50px;
+}
+
+.threelist-img {
+	width: 100px;
+	height: 100px;
+	border-radius: 8px;
+}
+
+.threelist-title {
+	margin: 18.2px 0px 0px 0px;
+	font-size: 20.8px;
+	color: #1a1a1a;
+}
+</style>
+
+<script>
+import router from "@system.router";
+module.exports = {
+	props: ["list"],
+	detail: function(item) {
+		//进入搜索页面
+		router.push({
+			uri: "Page_RecentSearch",
+			params: { isresult: true }
+		});
+	}
+};
+</script>

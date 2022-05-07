@@ -1,0 +1,295 @@
+<import name="mallclasssearchbar" src="./component/c_search_bar"></import>
+<import name="verticaltab" src="./component/c_verticalTab"></import>
+<import name="threelist" src="./component/c_threelist"></import>
+<import name="verticallist" src="./component/c_verticallist"></import>
+<template>
+	<div class="mallClassification-content">
+		<div class="mallClassification-wrap">
+			<mallclasssearchbar url="Page_RecentSearch" placeholder="{{placevalue}}"></mallclasssearchbar>
+		</div>
+		<div>
+			<div class="mallClassification-left">
+				<verticaltab list="{{malltype}}"></verticaltab>
+			</div>
+			<div class="mallClassification-right" if="{{malltype[0].select}}">
+				<list class="list">
+					<list-item type="listItem" for="{{tabClassList}}">
+						<threelist list="{{$item}}"></threelist>
+					</list-item>
+				</list>
+			</div>
+			<div else class="mallClassification-right">
+				<list class="list-verticallist">
+					<list-item type="listItem" class="verticallist-item" for="{{malldetail}}">
+						<verticallist list="{{$item}}"></verticallist>
+					</list-item>
+				</list>
+			</div>
+		</div>
+	</div>
+</template>
+
+<style>
+.verticallist-item {
+	padding: 0px 33px;
+	flex: 1;
+}
+
+.list {
+	height: 100%;
+}
+
+.list-verticallist {
+	height: 100%;
+	margin-right: 33px;
+}
+
+.mallClassification-content {
+	width: 750px;
+	margin: 17px 0px 0px 0px;
+	flex-direction: column;
+}
+
+.mallClassification-wrap {
+	margin-bottom: 17px;
+}
+
+.mallClassification-left {
+	margin: 0px 0px 0px 28px;
+}
+
+.mallClassification-right {
+	margin: 0px 0px 0px 35px;
+	flex-direction: column;
+	flex: 1;
+	border-left-color: rgba(0, 0, 0, 0.2);
+	border-left-width: 0.5px;
+}
+
+.mallClassification-title {
+	margin: 53px 0px 0px 33.3px;
+	color: #1a1a1a;
+	font-size: 27.1px;
+}
+
+.mallClassification-box {
+	flex-direction: column;
+}
+</style>
+
+<script>
+module.exports = {
+	data: {
+		//搜索框默认显示字符
+		placevalue: "隔离防晒霜",
+		//分类类别
+		malltype: [{
+				title: "为你推荐", //类别名称
+				select: true, //类别是否选中
+				id: "recommend" //类别id
+			},
+			{
+				title: "墨镜",
+				select: false,
+				id: "sunglasses"
+			},
+			{
+				title: "男装",
+				select: false,
+				id: "male"
+			},
+			{
+				title: "男女内衣",
+				select: false,
+				id: "underwear"
+			},
+			{
+				title: "女鞋",
+				select: false,
+				id: "shoes"
+			},
+			{
+				title: "男鞋",
+				select: false,
+				id: "menshoes"
+			},
+			{
+				title: "箱包皮鞋",
+				select: false,
+				id: "luggage"
+			},
+			{
+				title: "手表配饰",
+				select: false,
+				id: "watch"
+			},
+			{
+				title: "护肤彩妆",
+				select: false,
+				id: "skin"
+			},
+			{
+				title: "个人护理",
+				select: false,
+				id: "personskin"
+			},
+			{
+				title: "母婴",
+				select: false,
+				id: "mather"
+			},
+			{
+				title: "女装",
+				select: false,
+				id: "women"
+			}
+		],
+		//为你推荐列表
+		tabClassList: [{
+				title: '猜你想找',
+				data: [{
+						title: "凉鞋",//商品类别名称
+						icon: "./Page_MallClassification/TO_DELETE/find1.png",//商品类别图片
+						src: "1"//跳转地址
+					},
+					{
+						title: "女士休闲鞋",
+						icon: "./Page_MallClassification/TO_DELETE/find2.png",
+						src: "2"
+					},
+					{
+						title: "连衣裙",
+						icon: "./Page_MallClassification/TO_DELETE/find3.png",
+						src: "3"
+					},
+					{
+						title: "单鞋",
+						icon: "./Page_MallClassification/TO_DELETE/find4.png",
+						src: "1"
+					},
+					{
+						title: "凉拖",
+						icon: "./Page_MallClassification/TO_DELETE/find5.png",
+						src: "2"
+					},
+					{
+						title: "海外女鞋",
+						icon: "./Page_MallClassification/TO_DELETE/find6.png",
+						src: "3"
+					},
+					{
+						title: "半身裙",
+						icon: "./Page_MallClassification/TO_DELETE/find7.png",
+						src: "1"
+					},
+					{
+						title: "套装",
+						icon: "./Page_MallClassification/TO_DELETE/find8.png",
+						src: "2"
+					},
+					{
+						title: "男士运动鞋",
+						icon: "./Page_MallClassification/TO_DELETE/find9.png",
+						src: "3"
+					}
+				]
+			},
+			{
+				title: '你可能还喜欢',
+				data: [{
+						title: "衬衫",
+						icon: "./Page_MallClassification/TO_DELETE/love1.png",
+						src: "1"
+					},
+					{
+						title: "机械男表",
+						icon: "./Page_MallClassification/TO_DELETE/love2.png",
+						src: "2"
+					},
+					{
+						title: "发饰",
+						icon: "./Page_MallClassification/TO_DELETE/love3.png",
+						src: "3"
+					},
+					{
+						title: "面膜",
+						icon: "./Page_MallClassification/TO_DELETE/love4.png",
+						src: "1"
+					},
+					{
+						title: "护肤套装",
+						icon: "./Page_MallClassification/TO_DELETE/love5.png",
+						src: "2"
+					},
+					{
+						title: "防晒/隔离",
+						icon: "./Page_MallClassification/TO_DELETE/love6.png",
+						src: "3"
+					},
+					{
+						title: "凉鞋",
+						icon: "./Page_MallClassification/TO_DELETE/find1.png",
+						src: "1"
+					},
+					{
+						title: "女士休闲鞋",
+						icon: "./Page_MallClassification/TO_DELETE/find2.png",
+						src: "2"
+					},
+					{
+						title: "连衣裙",
+						icon: "./Page_MallClassification/TO_DELETE/find3.png",
+						src: "3"
+					}
+				]
+			}
+		],
+		//分类类别列表
+		malldetail: [{
+				title: "古驰太阳眼镜女2018新款粉渐变镜片大框镜片",//商品名称
+				icon: "./Page_MallClassification/TO_DELETE/next1.png",//商品图片
+				price: "￥2390",//商品价格
+				oldPrice: "￥3200",//商品原价
+				src: "1"//跳转地址
+			},
+			{
+				title: "女士古驰太阳眼镜女2018新款粉渐变镜片大...",
+				icon: "./Page_MallClassification/TO_DELETE/next2.png",
+				price: "￥2390",
+				oldPrice: "￥3200",
+				src: "2"
+			},
+			{
+				title: "GUUI古驰太阳眼镜女2018新款粉渐变镜片大...",
+				icon: "./Page_MallClassification/TO_DELETE/next3.png",
+				price: "￥2390",
+				oldPrice: "￥3200",
+				src: "3"
+			},
+			{
+				title: "NAN士古驰太阳眼镜女2018新款粉渐变镜片大...",
+				icon: "./Page_MallClassification/TO_DELETE/next4.png",
+				price: "￥2390",
+				oldPrice: "￥3200",
+				src: "2"
+			},
+			{
+				title: "GUUI古驰太阳眼镜女2018新款粉渐变镜片大...",
+				icon: "./Page_MallClassification/TO_DELETE/next5.png",
+				price: "￥2390",
+				oldPrice: "￥3200",
+				src: "3"
+			},
+			{
+				title: "GUUI古驰太阳眼镜女2018新款粉渐变镜片大...",
+				icon: "./Page_MallClassification/TO_DELETE/next6.png",
+				price: "￥2390",
+				oldPrice: "￥3200",
+				src: "3"
+			}
+		]
+	},
+	//初始化
+	onInit: function() {}
+};
+</script>

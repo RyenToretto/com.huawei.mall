@@ -1,0 +1,51 @@
+<template>
+	<div class="verticaltab-content">
+		<list>
+			<list-item type="listItem" class="item-menu" for="{{list}}">
+				<text @click="detail($item)" class="{{$item.select?'verticaltab-active':'verticaltab-text'}}">{{$item.title}}</text>
+			</list-item>
+		</list>
+	</div>
+</template>
+
+<style>
+	.verticaltab-content {
+		width: 151px;
+	}
+
+	.item-menu {
+		width: 151px;
+	}
+
+	.verticaltab-text {
+		width: 151px;
+		padding-left: 20px;
+		padding-top: 35px;
+		padding-bottom: 30px;
+		color: #4a4a4a;
+		font-size: 27.1px;
+	}
+
+	.verticaltab-active {
+		width: 151px;
+		padding-left: 20px;
+		padding-top: 35px;
+		padding-bottom: 30px;
+		color: #ff7500;
+		font-size: 27.1px;
+	}
+</style>
+
+<script>
+	module.exports = {
+		props: ["list"],
+		detail: function (item) {
+			this.list.forEach(element => {
+				if (element.select) {
+					element.select = false;
+				}
+			});
+			item.select = true;
+		}
+	};
+</script>

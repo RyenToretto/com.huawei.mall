@@ -1,0 +1,42 @@
+<template>
+    <div class="swipe">
+        <swiper autoplay="true">
+          <image class="banner-image" src="{{$item.uri}}" for="list" onclick="detail"></image>
+        </swiper>
+    </div>
+</template>
+
+<style>
+
+swiper {
+    indicator-selected-color:rgba(255, 255, 255, 1);
+    indicator-color:rgba(255, 255, 255, 0.5);
+    indicator-size:12.5px;
+}
+
+.swipe {
+    margin-bottom: 52.1px;
+    width: 684px;
+    height: 397px;
+}
+
+.banner-image {
+    width: 684px;
+    height: 397px;
+}
+
+</style>
+
+<script>
+import router from "@system.router"
+export default {
+    //banner图片路径数据
+	props: ['list'],
+    //点击商品，跳转到商品详情页面
+    detail: function(){
+        router.push({
+            uri: 'Page_MallDetail',
+        });
+    }
+}
+</script>

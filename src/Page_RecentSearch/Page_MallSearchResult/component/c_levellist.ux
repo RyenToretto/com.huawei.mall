@@ -1,0 +1,74 @@
+<template>
+	<div class="levellist-content">
+		<div for="{{list}}" class="levellist-box" onclick="detail($item)">
+			<image class="levellist-img" src="{{$item.icon}}"></image>
+			<text class="levellist-title">{{$item.title}}</text>
+			<div>
+				<text class="levellist-price">{{$item.price}}</text>
+				<text class="levellist-free">{{$item.free}}</text>
+				<text class="levellist-oldPrice">{{$item.oldPrice}}</text>
+			</div>
+		</div>
+	</div>
+</template>
+
+
+<style>
+.levellist-content {
+  margin: 0px 16px 0px 0px;
+  flex-direction: column;
+}
+
+.levellist-box {
+  margin: 0px 0px 33px 0px;
+  flex-direction: column;
+  width: 333.3px;
+}
+
+.levellist-title {
+  padding: 16.7px 0px 8px 0px;
+  font-size: 27.1px;
+  color: #1a1a1a;
+}
+
+.levellist-img {
+  width: 333.3px;
+  height: 333.3px;
+  border-radius: 8px;
+}
+
+.levellist-price {
+  color: #fa2a2d;
+  font-size: 20.8px;
+}
+
+.levellist-free {
+  width:64.7px;
+  text-align: center;
+  margin: 0px 0px 0px 20px;
+  font-size: 20.8px;
+  color: #ff7500;
+  border: 1px solid #ff7500;
+  border-radius: 4.2px;
+}
+
+.levellist-oldPrice {
+  margin: 0px 0px 0px 20px;
+  font-size: 20.8px;
+  text-decoration: line-through;
+  color: #8d8d8d;
+}
+</style>
+
+<script>
+import router from "@system.router";
+module.exports = {
+  props: ["list"],
+  detail: function(item) {
+    //进入商品详情页面
+    router.push({
+      uri: "Page_MallDetail"
+    });
+  }
+};
+</script>

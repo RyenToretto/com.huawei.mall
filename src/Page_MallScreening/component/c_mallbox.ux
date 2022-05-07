@@ -1,0 +1,92 @@
+<template>
+  <div class="mallbox-content">
+    <div class="mallbox-header" onclick="show">
+      <text class="mallbox-title">{{title}}</text>
+      <image if="{{!isShow}}" class="mallbox-img" src="./img/down.png"></image>
+      <image else class="mallbox-img" src="./img/up.png"></image>
+    </div>
+    <div if="{{isShow}}" class="mallbox-content-box">
+      <div>
+        <text if="{{list[0]?true:false}}" onclick="changeState(list[0])" class="{{list[0].ischoosed? choosed:unchoosed}}">{{list[0].title}}</text>
+        <text if="{{list[1]?true:false}}" onclick="changeState(list[1])" class="{{list[1].ischoosed? choosed:unchoosed}}">{{list[1].title}}</text>
+        <text if="{{list[2]?true:false}}" onclick="changeState(list[2])" class="{{list[2].ischoosed? choosed:unchoosed}}">{{list[2].title}}</text>
+        <text if="{{list[3]?true:false}}" onclick="changeState(list[3])" class="{{list[3].ischoosed? choosed:unchoosed}}">{{list[3].title}}</text>
+      </div>
+      <div>
+        <text if="{{list[4]?true:false}}" onclick="changeState(list[4])" class="{{list[4].ischoosed? choosed:unchoosed}}">{{list[4].title}}</text>
+        <text if="{{list[5]?true:false}}" onclick="changeState(list[5])" class="{{list[5].ischoosed? choosed:unchoosed}}">{{list[5].title}}</text>
+        <text if="{{list[6]?true:false}}" onclick="changeState(list[6])" class="{{list[6].ischoosed? choosed:unchoosed}}">{{list[6].title}}</text>
+        <text if="{{list[7]?true:false}}" onclick="changeState(list[7])" class="{{list[7].ischoosed? choosed:unchoosed}}">{{list[7].title}}</text>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style>
+  .mallbox-content {
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .mallbox-content-box {
+    flex-direction: column;
+    padding-bottom: 16.3px;
+  }
+
+  .mallbox-header {
+    padding: 36px 0px 33px 0px;
+  }
+
+  .mallbox-title {
+    flex: 1;
+    font-size: 31.3px;
+    color: #1a1a1a;
+  }
+
+  .mallbox-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .mallbox-item {
+    margin: 0px 12px 16.7px 0px;
+    padding: 8.5px 38px;
+    border-radius: 8.3px;
+    background-color: #f2f2f2;
+    color: #1a1a1a;
+    font-size: 25px;
+  }
+
+  .mallboxitem-choosed {
+    margin: 0px 12px 16.7px 0px;
+    padding: 8.5px 38px;
+    font-size: 25px;
+    color: #ff7500;
+    border-width: 0.5px;
+    border-radius: 8.3px;
+    border-color: #ff7500;
+    background-color: rgba(255, 117, 0, 0.1);
+  }
+</style>
+
+<script>
+  module.exports = {
+    props: ["list", "title"],
+    data: {
+      isShow: false,
+      choosed: 'mallboxitem-choosed',
+      unchoosed: 'mallbox-item'
+    },
+    show: function () {
+      this.isShow = !this.isShow;
+    },
+    changeState(item) {
+      this.list.forEach(element => {
+        if (element.ischoosed) {
+          element.ischoosed = false;
+        }
+      });
+      item.ischoosed = true;
+    }
+  };
+</script>

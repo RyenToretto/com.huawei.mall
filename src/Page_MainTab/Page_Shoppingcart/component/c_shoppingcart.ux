@@ -1,0 +1,422 @@
+<template>
+  <!-- template里只能有一个根节点 -->
+  <div class="shopping-container">
+
+    <div class="shoppingcart-title-area">
+      <text>购物车</text>
+    </div>
+
+    <div class="shopping-container" style="margin-bottom: 100px">
+      <!-- 位置 -->
+      <div class="page-head">
+        <image src="../img/location_gps.png"></image>
+        <text class="good-address">{{address}}</text>
+        <text onclick="change_state" class="goods-edit">{{change_state_tile}}</text>
+      </div>
+
+      <!-- 商品列表 -->
+      <block for="datas.list">
+        <div class="page-content">
+          <image class="check" onclick="change( $item )" style="width: 42px;height:42px;" src="{{$item.choosed ?datas.checked:datas.unChecked}}"></image>
+          <image class="pic" style="width:134px;height:150px;" src="{{$item.goods_pic}}"></image>
+          <div class="goods-detail">
+            <text class="goods-name">{{$item.goods_name}}</text>
+            <text class="goods-weigth">{{$item.goods_numbers}}</text>
+            <div>
+              <div style="margin-right: 118px">
+                <text class="good-discount">¥{{$item.goods_discount.toFixed(2)}}</text>
+                <text class="good-price">¥{{$item.goods_price.toFixed(2)}}</text>
+              </div>
+              <div class="count-number">
+                <div class="edit-minus" onclick="number_minute($item)">
+                  <image style="width: 15px;" src="../img/minus.png"></image>
+                </div>
+                <div class="edit-count">
+                  <text>{{$item.number}}</text>
+                </div>
+                <div class="edit-add" onclick="number_add($item)">
+                  <image style="width: 15px;height:32px;object-fit:contain;" src="../img/add.png"></image>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </block>
+    </div>
+
+    <div if="{{show}}">
+      <div if="{{no_edit}}" class="page-total">
+        <div class="all-choice">
+          <image class="all-img" onclick="allChange" src="{{all_choosed ?datas.checked:datas.unChecked}}"></image>
+          <text class="all">全选</text>
+        </div>
+        <div>
+          <text class="total">合计:</text>
+          <text class="total-price">¥{{total_price.toFixed(2)}}</text>
+        </div>
+        <input type="button" if="{{isCanGoPay}}" class="pay" value="去结算" onclick="check" />
+        <input type="button" else class="cannot-pay" value="去结算" />
+
+      </div>
+
+      <div if="{{!no_edit}}" class="page-total">
+        <div class="all-choice">
+          <image class="all-img" onclick="allChange" src="{{all_choosed ?datas.checked:datas.unChecked}}"></image>
+          <text class="all">全选</text>
+        </div>
+
+        <input type="button" if="{{isCanGoPay}}" class="delete" value="删除" />
+        <input type="button" else class="cannot-delete" value="删除" />
+      </div>
+    </div>
+
+  </div>
+
+</template>
+
+<style>
+  .shopping-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .shoppingcart-title-area {
+    background-color: rgba(242, 242, 242, 0.95);
+    height: 100px;
+    
+  }
+
+  .shoppingcart-title-area text {
+    font-size: 37.5px;
+    color: #1A1A1A;
+    margin-left: 33px;
+  }
+
+  .page-head {
+    height: 84px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 33px;
+  }
+
+  .page-head image {
+    width: 21px;
+    height: 26px;
+    resize-mode: contain;
+    margin-right: 12px;
+  }
+
+  .good-address {
+    font-size: 31.3px;
+    color: #1A1A1A;
+    width: 497px;
+    margin-right: 39px;
+  }
+
+  .goods-edit {
+    font-size: 27.1px;
+    color: #FF7500;
+    line-height: 34.9px;
+  }
+
+  .page-content {
+    align-items: center;
+    height: 169px;
+    margin-bottom: 50px;
+  }
+
+  .page-content .check {
+    width: 42px;
+    height: 42px;
+    border-radius: 8.3px;
+    margin-left: 28px;
+    margin-right: 26px;
+    border: 1px solid #FE9F05;
+  }
+
+  .page-content .pic {
+    width: 134px;
+    height: 142px;
+    border-radius: 8.3px;
+    margin-right: 33px;
+  }
+
+  .goods-detail {
+    flex-direction: column;
+  }
+
+  .goods-weigth {
+    color: #1A1A1A;
+    opacity: 0.3;
+    font-size: 20.8px;
+    margin-top: 8px;
+  }
+
+  .goods-name {
+    font-size: 31.3px;
+    color: #1A1A1A
+  }
+
+  .good-discount {
+    color: #FA2A2D;
+    font-size: 31.3px;
+    width: 100px;
+  }
+
+  .good-price {
+    color: #1A1A1A;
+    opacity: 0.3;
+    font-size: 20.8px;
+    width: 80px;
+    text-decoration: line-through;
+  }
+
+  .edit-minus {
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-width: 1.6px;
+    height: 50px;
+    border-bottom-left-radius: 6.3px;
+    border-top-left-radius: 6.3px;
+  }
+
+  .edit-count {
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    border-top-color: rgba(0, 0, 0, 0.2);
+    border-top-width: 1.6px;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    border-bottom-width: 1.6px;
+    height: 50px;
+  }
+
+  .edit-add {
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-width: 1.6px;
+    height: 50px;
+    border-top-right-radius: 6.3px;
+    border-bottom-right-radius: 6.3px;
+  }
+
+  .page-total {
+    justify-content: space-between;
+    height: 100px;
+    position: fixed;
+    bottom: 100px;
+    background-color: #FFFFFF;
+    left: 33px;
+    right: 0px;
+  }
+
+  .page-total image {
+    height: 42px;
+    width: 42px;
+    margin-right: 16px;
+    border: 1px solid #FE9F05;
+  }
+
+  .all {
+    font-size: 27.1px;
+    color: #1A1A1A;
+  }
+
+  .total {
+    font-size: 31.3px;
+    color: #1A1A1A;
+    margin-right: 8px;
+  }
+
+  .total-price {
+    font-size: 31.3px;
+    color: #FA2A2D;
+    margin-right: 34px;
+  }
+
+  .pay {
+    width: 267px;
+    height: 100px;
+    font-size: 31.3px;
+    color: #FFFFFF;
+    background-color: #FF7500;
+    text-align: center;
+  }
+
+  .cannot-pay {
+    width: 267px;
+    height: 100px;
+    font-size: 31.3px;
+    color: #FFFFFF;
+    background-color: #dcdcdc;
+    text-align: center;
+    /* margin-left: 200px; */
+  }
+
+  .delete {
+    width: 267px;
+    height: 100px;
+    font-size: 31.3px;
+    color: #FFFFFF;
+    background-color: #FE7500;
+    text-align: center;
+  }
+
+  .cannot-delete {
+    width: 267px;
+    height: 100px;
+    font-size: 31.3px;
+    color: #FFFFFF;
+    background-color: #dcdcdc;
+    text-align: center;
+  }
+
+  .all-choice {
+    align-items: center;
+  }
+
+  .all-img {
+    border: 2.1px solid #000000;
+    border-radius: 8.3px;
+  }
+</style>
+
+<script>
+  import router from '@system.router';
+
+  module.exports = {
+    props: [
+      'address',
+      'datas',
+      'show',
+      'shoppingcartnumbers'
+    ],
+    data: {
+      isCanGoPay: true,
+      total_price: 0,
+      no_edit: true,
+      change_state_tile: "商品编辑",
+      all_choosed: true
+    },
+    onInit() {
+      this.updateTotalPrice();
+      this.$page.setTitleBar({ text: '', textColor: '', backgroundColor: '', backgroundOpacity: 1, menu: false })
+    },
+    change: function (params) {
+      this.shoppingcartnumbers = this.shoppingcartnumbers - 1;
+      if (params.choosed) {
+        params.choosed = false;
+      } else {
+        params.choosed = true;
+      }
+      this.updateTotalPrice();
+
+      //判断是否全未选中
+      for (let i = 0; i < this.datas.list.length; i++) {
+        const element = this.datas.list[i];
+        if (element.choosed) {
+          this.isCanGoPay = true;
+          break;
+        }
+        this.isCanGoPay = false;
+      }
+
+      // 判断是否全选
+      for (let i = 0; i < this.datas.list.length; i++) {
+        const element = this.datas.list[i];
+        if (!element.choosed) {
+          this.all_choosed = false;
+
+          return;
+        }
+      }
+      this.all_choosed = true;
+    },
+    number_minute: function (params) {
+      if (params.number > 1) {
+        params.number--;
+        this.updateTotalPrice();
+      }
+
+
+    },
+    number_add: function (params) {
+      params.number++;
+      this.updateTotalPrice();
+    },
+    updateTotalPrice: function () {
+      this.total_price = 0;
+      this.shoppingcartnumbers = 0;
+      this.datas.list.forEach(element => {
+        if (element.choosed) {
+          this.total_price += element.number * element.goods_discount;
+          this.shoppingcartnumbers++;
+        }
+      });
+      this.emitabc(this.shoppingcartnumbers);
+    },
+    allChange: function () {
+      if (this.all_choosed) {
+        this.all_choosed = false;
+        if (this.isCanGoPay) {
+          this.isCanGoPay = false;
+        }
+        this.datas.list.forEach(element => {
+          if (element.choosed) {
+            element.choosed = false;
+          }
+        });
+        this.updateTotalPrice();
+        this.total_price = 0;
+      } else {
+        this.all_choosed = true;
+        if (!this.isCanGoPay) {
+          this.isCanGoPay = true;
+        }
+        this.datas.list.forEach(element => {
+          if (!element.choosed) {
+            element.choosed = true;
+          }
+        });
+        this.updateTotalPrice();
+      }
+    },
+    change_state: function () {
+      if (this.no_edit) {
+        this.no_edit = false;
+        this.change_state_tile = "完成编辑";
+      } else {
+        this.no_edit = true;
+        this.change_state_tile = "商品编辑";
+      }
+    },
+
+    //结算跳转
+    check: function () {
+      // let params;
+      let choosed_datas = [];
+      this.datas.list.forEach(element => {
+
+        if (element.choosed) {
+          choosed_datas.push(element);
+        }
+        // params =;
+      });
+      if (choosed_datas.length < 1) {
+        return;
+      }
+      router.push({
+
+        uri: 'Page_Orders',
+        // params: { datas:{"list": choosed_datas, "total_price": this.total_price ,'address':this.address}}
+      })
+    },
+    emitabc() {
+      this.$dispatch('evtType1', { num: this.shoppingcartnumbers });
+    }
+  }
+</script>

@@ -1,0 +1,85 @@
+<template>
+	<div class="verticallist-content">
+		<div for="{{list}}" class="verticallist-box" onclick="detail($item)">
+			<image class="verticallist-img" src="{{$item.icon}}"></image>
+			<div class="verticallist-text">
+				<text class="verticallist-title">{{$item.title}}</text>
+				<div>
+					<text class="verticallist-sub-title">{{$item.price}}</text>
+					<text class="verticallist-old">{{$item.oldPrice}}</text>
+				</div>
+				<div>
+					<text class="verticallist-free">{{$item.free1}}</text>
+					<text if="{{$item.free2?true:false}}" class="verticallist-free">{{$item.free2}}</text>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<style>
+.verticallist-content {
+  flex-direction: column;
+  padding: 0px 33px;
+  flex: 1;
+}
+
+.verticallist-box {
+  padding: 0px 0px 16.7px 0px;
+  margin: 0px 0px 16.7px 0px;
+  border-color: #cccccc;
+  border-bottom-width: 0.5px;
+  align-items: center;
+}
+
+.verticallist-text {
+  flex-direction: column;
+  flex: 1;
+}
+
+.verticallist-title {
+  color: #1a1a1a;
+  font-size: 27.1px;
+}
+
+.verticallist-sub-title {
+  color: #fa2a2d;
+  font-size: 20.8px;
+}
+
+.verticallist-img {
+  height: 216.7px;
+  width: 216.7px;
+  border-radius: 8px;
+  margin-right: 33.3px;
+}
+
+.verticallist-old {
+  color: #8d8d8d;
+  font-size: 20.8px;
+  margin: 0px 0px 0px 10px;
+  text-decoration: line-through;
+}
+
+.verticallist-free {
+  margin: 70px 8.3px 0px 0px;
+  padding: 0px 9.75px;
+  color: #ff7500;
+  border: 1px solid #ff7500;
+  border-radius: 4.2px;
+  font-size: 20.8px;
+}
+</style>
+
+<script>
+import router from "@system.router";
+module.exports = {
+  props: ["list"],
+  detail: function(item) {
+    //进入商品详情页面
+    router.push({
+      uri: "Page_MallDetail"
+    });
+  }
+};
+</script>

@@ -1,0 +1,205 @@
+<template>
+	<div>
+		<div class="fixed-container">
+			<div class="fixed-head1">
+				<div class="fixed-head-left">
+					<text class="fixed-main-title">{{banner.title}}</text>
+				</div>
+				<div class="fixed-head-right" if="{{banner.subtitle === undefined}}" onclick="showAllProducts">
+					<text class="fixed-link">{{banner.link}}</text>
+					<image class="fixed-arrow" src="../img/arrow.png"></image>
+				</div>
+			</div>
+			<div class="fixed-head2" if="{{banner.subtitle !== undefined}}">
+				<div class="fixed-head-left">
+					<text class="fixed-sub-title">{{banner.subtitle}}</text>
+				</div>
+				<div class="fixed-head-right" onclick="showAllProducts">
+					<text class="fixed-link" onclick="toPageNew">{{banner.link}}</text>
+					<image class="fixed-arrow" src="../img/arrow.png"></image>
+				</div>
+			</div>
+			<div class="fixed-list" if="{{num === 2}}">
+				<div for="{{list}}" class="fixed-product2" onclick="detail()">
+					<image class="fixed-image2" src="{{$item.uri}}"></image>
+					<text class="fixed-title">{{$item.title}}</text>
+					<text class="fixed-subtitle">{{$item.subtitle}}</text>
+				</div>
+			</div>
+			<div class="fixed-list" if="{{num === 3}}">
+				<div for="{{list}}" class="fixed-product3" onclick="detail()">
+					<image class="fixed-image3" src="{{$item.uri}}"></image>
+					<text class="fixed-title">{{$item.title}}</text>
+					<text class="fixed-subtitle">{{$item.subtitle}}</text>
+				</div>
+			</div>
+			<div class="fixed-list" if="{{num === 4}}">
+				<div for="{{list}}" class="fixed-product4" onclick="detail()">
+					<image class="fixed-image4" src="{{$item.uri}}"></image>
+					<text class="fixed-title">{{$item.title}}</text>
+					<text class="fixed-subtitle4">{{$item.subtitle}}</text>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<style>
+	.fixed-container {
+		margin: 21.4px 25px 33.3px 25px;
+		flex-direction: column;
+	}
+
+	.fixed-head1 {
+		justify-content: space-between;
+		align-content: center;
+		margin: 0px 8px 0px 8px;
+	}
+
+	.fixed-head2 {
+		justify-content: space-between;
+		align-content: center;
+		margin: 0px 8px 0px 8px;
+		align-items: flex-end;
+	}
+
+	.fixed-head-left {
+		align-items: center;
+	}
+
+	.fixed-main-title {
+		color: #1A1A1A;
+		font-size: 31px;
+	}
+
+	.fixed-head-right {
+		align-items: center;
+	}
+
+	.fixed-sub-title {
+		color: #8D8D8D;
+		font-size: 27px;
+	}
+
+	.fixed-link {
+		color: #8D8D8D;
+		font-size: 27px;
+		margin-right: 14px;
+	}
+
+	.fixed-list {
+		border-color: #0000ff;
+		flex-wrap: wrap;
+		/* margin-top: 24.5px; */
+		margin-top: 25px;
+	}
+
+	.fixed-arrow {
+		height: 28px;
+		width: 16px;
+		align-self: center;
+		resize-mode: contain;
+	}
+
+	.fixed-product2 {
+		width: 333.3px;
+		flex-direction: column;
+		border-radius: 8px;
+		background-color: #f2f2f2;
+		margin: 0px 8px 0px 8px;
+	}
+
+	.fixed-image2 {
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+		width: 333.3px;
+		height: 188px;
+		margin-bottom: 8px;
+	}
+
+	.fixed-product3 {
+		width: 217px;
+		flex-direction: column;
+		border-radius: 8px;
+		background-color: #f2f2f2;
+		margin: 0px 8px 0px 8px;
+	}
+
+	.fixed-image3 {
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+		width: 217px;
+		height: 217px;
+		margin-bottom: 8px;
+	}
+
+	.fixed-product4 {
+		width: 158px;
+		flex-direction: column;
+		border-radius: 8px;
+		background-color: #f2f2f2;
+		margin: 0px 8px 0px 8px;
+	}
+
+	.fixed-image4 {
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+		width: 158px;
+		height: 160px;
+		margin-bottom: 8px;
+	}
+
+	.fixed-title {
+		color: #1A1A1A;
+		font-size: 27px;
+		margin-left: 18px;
+	}
+
+	.fixed-subtitle {
+		color: #8d8d8d;
+		font-size: 21px;
+		margin-left: 18px;
+		margin-bottom: 8.1px;
+	}
+
+	.fixed-subtitle4 {
+		color: #8d8d8d;
+		font-size: 21px;
+		margin-left: 18px;
+		margin-bottom: 15.9px;
+	}
+</style>
+
+<script>
+	import router from "@system.router"
+	export default {
+		data: {
+			props: [
+				'list',	//商品信息数组，每一个元素包含商品图片路径、主标题、副标题
+				'num',	//一行显示商品的数量
+				'banner'//活动标题信息，包含主标题、副标题、链接入口名称
+			],
+		},
+		//更多链接触发函数
+		press(item) {
+			console.error("on press event param : " + item);
+		},
+		//点击更过链接，显示所有商品
+		showAllProducts: function () {
+
+		},
+		//点击商品，跳转到商品详情页面
+		detail: function () {
+			router.push({
+				uri: 'Page_MallDetail',
+			});
+		},
+
+		toPageNew() {
+			router.push({
+				uri: 'Page_For_New_People',
+			});
+		}
+		
+	}
+</script>

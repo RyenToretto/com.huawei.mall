@@ -1,0 +1,43 @@
+<import name="trade_goods" src="./component/c_trade_goods"></import>
+<template>
+  <div class="container">
+    <trade_goods list="{{list}}" keyworld="{{keyworld}}"></trade_goods>
+  </div>
+</template>
+
+<style>
+  .container {
+    flex-direction: column;
+  }
+</style>
+
+<script>
+
+  module.exports = {
+    data: {
+      list: [
+        { state: '待评价', image: 'TO_DELETE/Bitmap.png', title: 'BLUEerror原创设计 秋季宽松不规则格子七分袖女前短后长上衣', size: '黑色', amount: '1', money: '178' }
+      ],
+      keyworld: [
+        { key: "时尚",class:"actived" },
+        { key: "舒适" ,class:"keyworld"},
+        { key: "质量好" ,class:"keyworld"},
+        { key: "性价比高" ,class:"keyworld"},
+        { key: "文艺",class:"keyworld" }
+      ]
+    },
+    onInit() {
+      this.$page.setTitleBar({
+        text: '评价',
+        textColor: '#1a1a1a',
+        backgroundColor: '#f2f2f2',
+        menu: true
+      })
+    },
+
+    showChangePrompt() {
+
+    }
+
+  }
+</script>

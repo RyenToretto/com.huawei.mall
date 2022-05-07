@@ -1,0 +1,197 @@
+<import name="levellist" src="./component/c_levellist"></import>
+<import name="verticallist" src="./component/c_verticallist"></import>
+<template>
+	<div class="mallsearchresult-content">
+		<div class="mallsearchresult-header">
+			<text class="mallsearchresult-title">价格</text>
+			<div class="mallsearchresult-img-box">
+				<image class="mallsearchresult-img-up" src="./img/icon_up.png" onclick="search('price','up')"></image>
+				<image class="mallsearchresult-img-down" src="./img/icon_down.png" onclick="search('price','down')"></image>
+			</div>
+			<text class="mallsearchresult-title">销量</text>
+			<div class="mallsearchresult-img-box">
+				<image class="mallsearchresult-img-up" src="./img/icon_up.png" onclick="search('sales','up')"></image>
+				<image class="mallsearchresult-img-down" src="./img/icon_down.png" onclick="search('sales','down')"></image>
+			</div>
+			<text class="mallsearchresult-title">筛选</text>
+			<image class="mallsearchresult-img-screening" src="./img/icon_screening.png" onclick="screening"></image>
+			<image if="{{showType}}" class="mallsearchresult-img-list" src="./img/icon_list.png" onclick="changeType"></image>
+			<image else class="mallsearchresult-img-list" src="./img/icon_ver.png" onclick="changeType"></image>
+		</div>
+		<div if="{{showType}}" class="mallsearchresult-firstbox">
+			<levellist list="{{hlist1}}"></levellist>
+			<levellist list="{{hlist2}}"></levellist>
+		</div>
+		<verticallist else list="{{vlist}}"></verticallist>
+	</div>
+</template>
+
+<style>
+.mallsearchresult-content {
+  flex-direction: column;
+}
+
+.mallsearchresult-header {
+  margin: 31px 59px 48px 70.3px;
+  align-items: center;
+}
+
+.mallsearchresult-title {
+  color: #000000;
+  font-size: 31.3px;
+}
+
+.mallsearchresult-img-box {
+  flex-direction: column;
+  margin: 0px 80px 0px 21px;
+}
+
+.mallsearchresult-img-up {
+  width: 23.9px;
+  height: 13.5px;
+  margin: 0px 0px 8.6px 0px;
+}
+
+.mallsearchresult-img-down {
+  width: 23.9px;
+  height: 13.5px;
+}
+
+.mallsearchresult-firstbox {
+  margin: 0px 0px 0px 33px;
+}
+
+.mallsearchresult-img-screening {
+  width: 50px;
+  height: 50px;
+  margin: 0px 59px 0px 7.8px;
+}
+
+.mallsearchresult-img-list {
+  width: 50px;
+  height: 50px;
+}
+</style>
+
+<script>
+import router from "@system.router";
+module.exports = {
+  data: {
+    //搜索结果显示格式，四方格还是竖向排列，true为四方格false为竖向排列
+    showType: true,
+    //搜索结果四方格数据1
+    hlist1: [
+      {
+        icon: "./Page_MallSearchResult/TO_DELETE/result1.jpg",//商品图片
+        title: "OTMASTER2018夏装新款",//商品名称
+        price: "￥209",//商品价格
+        free: "省99",//商品优惠
+        oldPrice: "单买价￥418",//商品原价
+        id: "1"//商品id
+      },
+      {
+        icon: "./Page_MallSearchResult/TO_DELETE/result2.png",
+        title: "2018夏新款bf风下身...",
+        price: "￥68",
+        free: "包邮",
+        oldPrice: "",
+        id: "3"
+      },
+      {
+        icon: "./Page_MallSearchResult/TO_DELETE/result3.jpg",
+        title: "白色中长款宽松大t恤女夏",
+        price: "￥99",
+        free: "包邮",
+        oldPrice: "",
+        id: "4"
+      }
+    ],
+    //搜索结果四方格数据2
+    hlist2: [
+      {
+        icon: "./Page_MallSearchResult/TO_DELETE/result4.png",
+        title: "绒美【TX04048600】高...",
+        price: "￥369",
+        free: "省99",
+        oldPrice: "单买价￥699",
+        id: "7"
+      },
+      {
+        icon: "./Page_MallSearchResult/TO_DELETE/result5.jpg",
+        title: "2018DSDSA夏装新款女",
+        price: "￥129",
+        free: "省99",
+        oldPrice: "单买价￥318",
+        id: "9"
+      },
+      {
+        icon: "./Page_MallSearchResult/TO_DELETE/result6.jpg",
+        title: "夏装美丽新款连衣裙",
+        price: "￥259",
+        free: "省99",
+        oldPrice: "",
+        id: "2"
+      }
+    ],
+    //搜索结果竖向排列数据
+    vlist: [
+      {
+        icon: "./Page_MallSearchResult/TO_DELETE/ver1.png",
+        title: "BLUEerror原创设计 秋季宽松不规则格子七分袖t恤前短后长上衣",
+        price: "￥196",
+        oldPrice: "单买价￥418",
+        free1: "省99",
+        id: "2"
+      },
+      {
+        icon: "./Page_MallSearchResult/TO_DELETE/ver2.png",
+        title: "短袖套装女网红两件套裙俏皮时尚夏装2018新款学生韩版高腰小清新",
+        price: "￥196",
+        oldPrice: "",
+        free1: "省99",
+        id: "2"
+      },
+      {
+        icon: "./Page_MallSearchResult/TO_DELETE/ver3.png",
+        title: "韩都衣舍2018夏装新韩版女字母刺绣潮流上衣学生短袖T恤TK1624",
+        price: "￥196",
+        oldPrice: "单买价￥418",
+        free1: "省99",
+        free2: "优惠卷",
+        id: "2"
+      },
+      {
+        icon: "./Page_MallSearchResult/TO_DELETE/ver4.png",
+        title: "ins火的上衣夏天潮流女装2018新款不对称短袖T恤韩范",
+        price: "￥259",
+        oldPrice: "",
+        free1: "省99",
+        free2: "优惠卷",
+        id: "2"
+      },
+      {
+        icon: "./Page_MallSearchResult/TO_DELETE/ver1.png",
+        title: "短袖套装女网红两件套裙俏皮时尚夏装2018新款学生韩版高腰小清新",
+        price: "￥259",
+        oldPrice: "",
+        free1: "省99",
+        id: "2"
+      }
+    ]
+  },
+  //跳到筛选页面
+  screening: function() {
+    router.push({
+      uri: "Page_MallScreening"
+    });
+  },
+  //改变列表显示格式
+  changeType: function() {
+    this.showType = !this.showType;
+  },
+  //按照价格或者销量升序或者降序搜索
+  search: function(type, sort) {
+    console.log("搜索类型" + type + "排序结果" + sort);
+  }
+};
+</script>

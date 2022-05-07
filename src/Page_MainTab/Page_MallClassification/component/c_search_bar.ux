@@ -1,0 +1,65 @@
+<template>
+    <!-- 搜索栏组件 -->
+    <div class="container">
+        <div class="div_search" onclick="rediect">
+            <image class="image_search" src="../img/c_search_search.png"></image>
+            <text class="place_holder">{{placeholder}}</text>
+        </div>
+    </div>
+</template>
+
+<style>
+    .container {
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+    }
+
+    .title {
+        font-size: 100px;
+    }
+
+    .div_search {
+        background-color: #f2f2f2;
+        width: 684px;
+        height: 66.7px;
+        margin-left: 33px;
+        margin-right: 33px;
+        border-radius: 8px;
+        align-items: center;
+    }
+
+    .image_search {
+        width: 33px;
+        height: 33px;
+        margin: 17px;
+    }
+
+    .place_holder {
+        width: 500px;
+        height: 40px;
+        font-size: 27px;
+        color: #1A1A1A;
+    }
+</style>
+
+<script>
+    import router from '@system.router';
+
+    export default {
+        props: [
+            'url',
+            'placeholder'
+        ],
+        onInit: function () {
+            if (this.placeholder === "" || this.placeholder === undefined) {
+                this.placeholder = "搜索栏组件默认字符";
+            }
+        },
+        rediect() {
+            router.push({ uri: this.url });
+        }
+
+    }
+</script>

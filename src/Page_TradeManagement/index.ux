@@ -1,0 +1,137 @@
+<import name="all_trade" src="./component/c_trade_all"></import>
+<import name="trade_not_pay" src="./component/c_trade_not_pay"></import>
+<import name="trade_not_receive" src="./component/c_trade_not_receive"></import>
+<import name="trade_not_evaluate" src="./component/c_trade_not_evaluate"></import>
+<import name="trade_done" src="./component/c_trade_done"></import>
+<template>
+  <div class="container">
+    <!--tab组件-->
+    <tabs class="tabs" index="{{tabsIndex}}" onchange="changeTabactive">
+      <tab-bar class="tab-bar">
+        <text class="tab-text">全部</text>
+        <text class="tab-text">代付款</text>
+        <text class="tab-text">待收货</text>
+        <text class="tab-text">待评价</text>
+        <text class="tab-text">已完成</text>
+      </tab-bar>
+
+      <tab-content class="tab-content">
+        <!--全部-->
+        <div class="item-container">
+          <all_trade list="{{allTradeList}}"></all_trade>
+        </div>
+
+        <!--代付款-->
+        <div class="item-container">
+          <trade_not_pay list="{{notPayList}}"></trade_not_pay>
+        </div>
+
+        <!--待收货-->
+        <div class="item-container">
+          <trade_not_receive list="{{notReceiveList}}"></trade_not_receive>
+        </div>
+
+        <!--待评价-->
+        <div class="item-container">
+          <trade_not_evaluate list="{{notEvaluateList}}"></trade_not_evaluate>
+        </div>
+
+        <!--已完成-->
+        <div class="item-container">
+          <trade_done list="{{tradeDoneList}}"></trade_done>
+        </div>
+      </tab-content>
+    </tabs>
+  </div>
+</template>
+
+<style>
+  .tabs {
+    background-color: #ffffff;
+  }
+
+  .tab-content {
+  }
+
+  .tab-bar {
+    height: 100px;
+    color: #bbbbbb;
+    justify-content: space-between;
+  }
+
+  .tab-text {
+    margin-top: 29.2px;
+    font-size: 31.3px;
+    text-align: center;
+    padding: 0 10px;
+    color: #1a1a1a;
+    opacity: 0.5;
+  }
+
+  .tab-text:active {
+    color: #ff7500;
+    border-bottom-width: 4.2px;
+    line-height: 60px;
+    font-size: 31.3px;
+    border-bottom-color: #ff7500;
+  }
+
+  .item-container {
+    flex-direction: column;
+  }
+</style>
+
+<script>
+
+  export default {
+    protected: {
+      item: ''     //item 为将接收的路由参数
+    },
+    public: {
+      tabsIndex: 0,
+      //state=0全部；state=1待付款；state=2待收货；state=3待评价；state=4完已成；
+      allTradeList: [
+        { state: 1, image: 'TO_DELETE/read1.png', title: 'BLUEerror原创设计 秋季宽松不规则格子七分袖女前短后长上衣', size: 'M码，红色格子', amount: '2', money: '299' },
+        { state: 2, image: 'TO_DELETE/find1.png', title: '韩都衣舍2018夏装新韩版女字母刺绣潮流上衣学生短袖T恤TK1624', size: '黑色', amount: '1', money: '178' },
+        { state: 4, image: 'TO_DELETE/2.png', title: '黑色长裙吊带款 BLUEerror原创设计潮流2018新款上市', size: 'L码，黑色', amount: '2', money: '988' }
+      ],
+      notPayList: [
+        { state: 1, image: 'TO_DELETE/find1.png', title: 'BLUEerror原创设计 秋季宽松不规则格子七分袖女前短后长上衣', size: '黑色', amount: '1', money: '178' },
+        { state: 1, image: 'TO_DELETE/2.png', title: '黑色长裙吊带款 BLUEerror原创设计潮流2018新款上市', size: 'L码，黑色', amount: '2', money: '988' }
+      ],
+      notReceiveList: [
+        { state: 2, image: 'TO_DELETE/2.png', title: '黑色长裙吊带款 BLUEerror原创设计潮流2018新款上市', size: 'L码，黑色', amount: '2', money: '988' },
+        { state: 2, image: 'TO_DELETE/read1.png', title: '韩都衣舍2018夏装新韩版女字母刺绣潮流上衣学生短袖T恤TK1624', size: 'M码，红色格子', amount: '2', money: '299' },
+        { state: 2, image: 'TO_DELETE/find1.png', title: 'BLUEerror原创设计 秋季宽松不规则格子七分袖女前短后长上衣', size: '黑色', amount: '1', money: '178' },
+      ],
+      notEvaluateList: [
+        { state: 3, image: 'TO_DELETE/read1.png', title: '韩都衣舍2018夏装新韩版女字母刺绣潮流上衣学生短袖T恤TK1624', size: 'M码，红色格子', amount: '2', money: '299' },
+        { state: 3, image: 'TO_DELETE/find1.png', title: 'BLUEerror原创设计 秋季宽松不规则格子七分袖女前短后长上衣', size: '黑色', amount: '1', money: '178' },
+        { state: 3, image: 'TO_DELETE/2.png', title: '黑色长裙吊带款 BLUEerror原创设计潮流2018新款上市', size: 'L码，黑色', amount: '2', money: '988' }
+      ],
+      tradeDoneList: [
+        { state: 4, image: 'TO_DELETE/find1.png', title: 'BLUEerror原创设计 秋季宽松不规则格子七分袖女前短后长上衣', size: '黑色', amount: '1', money: '178' },
+        { state: 4, image: 'TO_DELETE/read1.png', title: '韩都衣舍2018夏装新韩版女字母刺绣潮流上衣学生短袖T恤TK1624', size: 'M码，红色格子', amount: '2', money: '299' },
+      ]
+    },
+    onInit: function () {
+      this.$page.setTitleBar({
+        text: '订单管理',
+        textColor: '#1a1a1a',
+        backgroundColor: '#f2f2f2',
+      });
+
+      if (this.item) {
+        this.item = JSON.parse(this.item);
+        this.tabsIndex = this.item.state;
+      }
+
+    },
+
+    changeTabactive: function (e) {
+      //change tab todo
+    },
+
+
+  }
+</script>

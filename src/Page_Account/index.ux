@@ -1,0 +1,40 @@
+<import name="account" src="./component/c_account.ux"></import>
+<template>
+	<div class="account-wrapper">
+		<!-- 请给账户管理页面传入用户登录名和绑定手机号信息 -->
+		<account username="{{username}}" phone="{{phone}}"></account>
+	</div>
+</template>
+
+<style>
+.account-wrapper {
+	width: 750px;
+	height: 300px;
+}
+</style>
+
+<script>
+export default {
+	data() {
+		return {
+			//传入账户登录名和绑定手机号
+			username: {
+				key: '登录名',
+				value: 'xxxxxxxxx@qq.com'
+			},
+			phone: {
+				key: '绑定手机',
+				value: 'xxxxxxxxxxx'
+			}
+		}
+	},
+	onInit() {
+		this.$page.setTitleBar({
+			text: '账户管理',
+			textColor: "#ffffff",
+			backgroundColor: "#F2F2F2",
+			menu: false
+		});
+	}
+}
+</script>

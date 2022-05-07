@@ -1,0 +1,243 @@
+<template>
+	<!-- template里只能有一个根节点 -->
+	<div class="container">
+		<div class="content">
+			<!-- 位置 -->
+			<div class="page-head">
+				<image src="./img/location_gps.png"></image>
+				<text class="good-address" onclick="select">{{datas.address}}</text>
+				<text onclick="change_state" class="goods-edit">编辑商品</text>
+			</div>
+
+			<!-- 商品列表 -->
+			<block for="datas.list">
+				<div class="page-content">
+					<image class="pic" style="width:134px;height:150px;" src="{{$item.goods_pic}}"></image>
+					<div class="goods-detail">
+						<text class="goods-name">{{$item.goods_name}}</text>
+						<text class="goods-weigth">{{$item.goods_numbers}}</text>
+						<div>
+							<div class="count-number">
+								<text class="good-number">数量X{{$item.number}}</text>
+								<text class="good-discount">¥{{$item.goods_discount.toFixed(2)}}</text>
+							</div>
+						</div>
+					</div>
+				</div>
+			</block>
+
+			<div class="pay-attention">
+
+				<!-- 优惠券 -->
+				<div class="remark">
+					<div class="remark-text">
+						<text class="att-title">优惠券</text>
+						<text>满一百减20</text>
+					</div>
+					<image src="./img/right_grey.png"></image>
+				</div>
+
+				<!-- 发票抬头 -->
+				<div class="remark">
+					<div class="remark-text">
+						<text class="att-title">发票抬头</text>
+						<text>不需要发票</text>
+					</div>
+					<image src="./img/right_grey.png"></image>
+				</div>
+
+				<!-- 备注 -->
+				<div class="remark">
+					<text class="att-title" style="margin-right: 20px;">备注</text>
+					<input placeholder="请注名，是否需要清洗等要求"></input>
+				</div>
+
+			</div>
+
+		</div>
+
+		<!-- 合计 -->
+		<div class="page-total">
+			<div>
+				<text class="total">合计:</text>
+				<text class="total-price">¥{{datas.total_price.toFixed(2)}}</text>
+			</div>
+			<input type="button" class="pay" value="确认支付" />
+		</div>
+
+	</div>
+</template>
+
+<style>
+	.container {
+		flex-direction: column;
+		/* justify-content: center;  */
+	}
+
+	.content {
+		margin-bottom: 100px;
+		flex-direction: column;
+	}
+
+	.page-head {
+		height: 84px;
+		align-items: center;
+	}
+
+	.page-head image {
+		width: 21px;
+		height: 26px;
+		resize-mode: contain;
+		margin-left: 33px;
+		margin-right: 12px;
+	}
+
+	.good-address {
+		font-size: 31.3px;
+		color: #1A1A1A;
+		width: 497px;
+		margin-right: 39px;
+	}
+
+	.goods-edit {
+		font-size: 31.3px;
+		color: #FF742E;
+	}
+
+	.page-content {
+		align-items: center;
+		height: 169px;
+		margin-bottom: 50px;
+		margin: 0px 33px;
+	}
+
+	.page-content .pic {
+		width: 134px;
+		height: 142px;
+		border-radius: 8.3px;
+		margin-right: 33px;
+	}
+
+	.goods-detail {
+		flex-direction: column;
+	}
+
+	.goods-weigth {
+		color: #1A1A1A;
+		opacity: 0.3;
+		font-size: 20.8px;
+		margin-top: 8px;
+	}
+
+	.goods-name {
+		font-size: 31.3px;
+		color: #1A1A1A;
+		margin-bottom: 8px;
+	}
+
+	.good-discount {
+		color: #FA2A2D;
+		font-size: 31.3px;
+		width: 100px;
+	}
+
+	.count-number {
+		justify-content: space-between;
+		width: 700px;
+		margin-top: 21px;
+	}
+
+	.good-number {
+		color: #1A1A1A;
+		font-size: 25px;
+	}
+
+	.page-total {
+		justify-content: space-between;
+		height: 100px;
+		position: fixed;
+		bottom: 0px;
+		background-color: #FFFFFF;
+	}
+
+	.pay-attention {
+		flex-direction: column;
+		margin-left: 33px;
+	}
+
+	.remark {
+		height: 100px;
+		align-items: center;
+	}
+
+	.remark input {
+		font-size: 27.1px;
+	}
+
+	.remark-text {
+		width: 650px;
+		justify-content: space-between;
+		margin-right: 12px;
+	}
+
+	.remark image {
+		width: 16px;
+		height: 28px;
+		resize-mode: contain;
+	}
+
+	.att-title {
+		font-size: 31.3px;
+		color: #1A1A1A;
+	}
+
+	.total {
+		font-size: 31.3px;
+		color: #1A1A1A;
+		margin-right: 8px;
+		margin-left: 33px;
+	}
+
+	.total-price {
+		font-size: 31.3px;
+		color: #FA2A2D;
+		margin-right: 34px;
+	}
+
+	.pay {
+		width: 267px;
+		height: 100px;
+		font-size: 31.3px;
+		color: #FFFFFF;
+		background-color: #FF7500;
+		text-align: center;
+	}
+</style>
+
+<script>
+	import router from '@system.router';
+	module.exports = {
+		props: [
+			'datas'
+		],
+		onInit() {
+			this.$page.setTitleBar({
+				text: "确认订单",
+				textColor: '#1a1a1a',
+				backgroundColor: '#f2f2f2',
+				menu: false
+			})
+		},
+		change_state: function () {
+			router.back()
+		},
+		select: function () {
+			router.push({
+				uri: 'Page_SelectReceiveAdd',
+			})
+		},
+		//此处添加确认支付页面
+		pay: function () {
+		}
+	}
+</script>

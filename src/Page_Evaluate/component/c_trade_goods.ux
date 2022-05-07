@@ -1,0 +1,311 @@
+<template>
+	<list class="goos_container">
+		<list-item type="listItem" for="{{list}}" class="goos_lists">
+			<text class="rating_text">为商品打分</text>
+			<div class="start justify_content_center">
+				<rating class="ratingStyle" rating="3">
+				</rating>
+			</div>
+			<div class="justify_content_center">
+				<text class="rating_evaluat_text">挺不错</text>
+			</div>
+
+			<div class="keyworld_content">
+				<text for="{{keyworld}}" onclick="evaluate($item)" class="{{$item.class}} ">{{$item.key}}</text>
+			</div>
+			<div class="time_clock flex_row ">
+				<image class="clock_image" src="../img/clock.png"></image>
+				<text class="goods_time">2018-11-28 17:15:20</text>
+			</div>
+
+			<div onclick="goToPage($item)" class="sigle_goos_list">
+				<div class="image_contaner">
+					<image class="goods_image" src="{{$item.image}}"></image>
+				</div>
+
+				<div class="goods_description flex_row">
+					<div class="title_size flex_column">
+						<text class="goods_title">{{$item.title}}</text>
+						<text class="goods_size">{{$item.size}}</text>
+					</div>
+
+					<div class="money_amount  flex_column">
+						<text class="goods_money">￥{{$item.money}}</text>
+						<text class="goods_amount"> X {{$item.amount}}</text>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="separate_line"></div>
+			<div class="bottom_amount_money">
+				<text class="_amount">共1件商品</text>
+				<text class="need_pay"> 实付款 ：</text>
+				<text class="_money">￥{{$item.money}}</text>
+
+			</div>
+		</list-item>
+		<list-item type="listItem2" class="text_content">
+			<text class="text_world">发表评价</text>
+			<textarea class="textarea" placeholder="请填写您的评价"></textarea>
+			<div class="footer">
+				<text class="ok_btn">
+					发表评价
+				</text>
+			</div>
+		</list-item>
+
+	</list>
+</template>
+
+<style>
+	.text_content {
+		flex-direction: column;
+	}
+	.goos_container {
+		margin: 0 33px;
+		flex-direction: column;
+	}
+
+	.goos_lists {
+		flex-direction: column;
+	}
+
+	.rating_text {
+		margin-top: 26px;
+		font-size: 31px;
+		color: #1a1a1a;
+	}
+
+	.start {
+		margin-top: 28.1px;
+		margin-bottom: 3.6px;
+	}
+
+	.rating_evaluat_text {
+		font-size: 21px;
+		color: #808080;
+	}
+
+	.ratingStyle {
+		star-background: url(img/ic_stars_gray_mid.png);
+		star-foreground: url(img/ic_stars_blue_mid.png);
+		height: 50px;
+	}
+
+	.keyworld_content {
+		width: 100%;
+		flex-wrap: wrap;
+		margin-top: 32.8px;
+	}
+
+	.keyworld {
+		margin-right: 16.7px;
+		margin-bottom: 20px;
+		background-color: #f2f2f2;
+		padding: 5px 30px;
+		border-radius: 5px;
+		font-size: 25px;
+	}
+
+	.actived {
+		margin-right: 16.7px;
+		margin-bottom: 20px;
+		padding: 5px 30px;
+		border-radius: 5px;
+		font-size: 25px;
+		color: #ff7500;
+		border-width: 0.5px;
+		border-color: #ff7500;
+		background-color: rgba(255, 117, 0, 0.1);
+	}
+
+	.time_clock {
+		margin-top: 23.8px;
+		margin-bottom: 24px;
+		align-items: center;
+	}
+
+	.goods_time {
+		font-size: 25px;
+		color: #1a1a1a;
+		opacity: 0.5;
+	}
+
+	.clock_image {
+		width: 33.3px;
+		height: 33.3px;
+		margin-right: 10px;
+	}
+
+	.sigle_goos_list {
+		padding-bottom: 26px;
+	}
+
+	.image_contaner {
+		width: 133.3px;
+		height: 133px;
+		margin-right: 33px;
+	}
+
+	.goods_image {
+		width: 133.3px;
+		height: 133px;
+		border-radius: 8px;
+	}
+
+	.goods_description {
+		width: 75%;
+	}
+
+	.title_size {
+		width: 85%;
+	}
+
+	.goods_title {
+		color: #1a1a1a;
+		font-size: 28px;
+		line-height: 40.6px;
+		margin-bottom: 26.6px;
+	}
+
+	.goods_size {
+		color: #1a1a1a;
+		opacity: 0.5;
+		font-size: 21px;
+	}
+
+	.money_amount {
+		width: 15%;
+	}
+
+	.goods_money {
+		width: 100%;
+		font-size: 27px;
+		text-align: right;
+	}
+
+	.goods_amount {
+		width: 100%;
+		color: #1a1a1a;
+		opacity: 0.5;
+		font-size: 21px;
+		align-self: center;
+		text-align: right;
+	}
+
+	.separate_line {
+		border-bottom-width: 1px;
+		border-color: rgba(0, 0, 0, 0.2);
+	}
+
+	.bottom_amount_money {
+		width: 100%;
+		justify-content: flex-end;
+		margin-top: 30px;
+		margin-bottom: 51.6px;
+	}
+
+	._amount {
+		margin-right: 10px;
+		font-size: 25px;
+		color: #1a1a1a;
+		opacity: 0.5;
+	}
+
+	.need_pay {
+		color: #1a1a1a;
+		font-size: 28px;
+	}
+
+	._money {
+		color: #fa2a2d;
+		font-size: 31px;
+		margin-right: 33px;
+	}
+
+	.text_world {
+		color: #1a1a1a;
+		margin-bottom: 24px;
+		font-size: 31px;
+	}
+
+	.textarea {
+		width: 683.3px;
+		height: 270px;
+		border-width: 0.5px;
+		border-color: #979797;
+		border-radius: 8px;
+		font-size: 25px;
+		padding-top: 17px;
+		padding-left: 22.9px;
+	}
+
+	.footer {
+		background-color: #ffffff;
+		height: 100px;
+		width: 100%;
+		padding: 0 33px;
+		margin-top: 95.8px;
+		margin-bottom: 33px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.ok_btn {
+		width: 375px;
+		height: 66px;
+		background-color: rgb(255, 136, 0);
+		color: #ffffff;
+		text-align: center;
+		align-items: center;
+		border-radius: 5px;
+	}
+
+	.justify_content_center {
+		justify-content: center;
+	}
+
+	.flex_column {
+		flex-direction: column;
+	}
+
+	.flex_row {
+		flex-direction: row;
+	}
+
+	.flex_end {
+		justify-content: flex-end;
+	}
+</style>
+
+<script>
+	import router from '@system.router';
+	export default {
+		data: {
+			props: [
+				'list',
+				'keyworld'
+			]
+		},
+
+		onInit() {
+
+		},
+		goToPage(item) {
+			router.push({
+				uri: '/Page_Bookdetails',
+				params: { item: item }
+			})
+		},
+		evaluate(item) {
+			if (item.class === 'actived') {
+				item.class = 'keyworld';
+				return;
+			}
+			item.class = 'actived';
+		}
+
+	}
+</script>

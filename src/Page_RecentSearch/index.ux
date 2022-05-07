@@ -1,0 +1,253 @@
+<import name="searchresult" src="./Page_MallSearchResult/index"></import>
+<template>
+	<!-- template里只能有一个根节点 -->
+	<div class="container">
+		<div class="mallsearch-header">
+			<image class="mallsearch-img" src="./img/back.png" onclick="back"></image>
+			<div class="mallsearch-input">
+        <input class="mallsearch-text" value="{{keyWord}}" placeholder="{{placeholder}}" @change="search"></input>
+			  <image if="{{keyWord==''?false:true}}" class="address-search-img" src="./img/search_close.png" onclick="deleteKey"></image>
+      </div>
+      <text class="mallsearch-btn" onclick="searchFun">搜索</text>
+		</div>
+		<div if="{{isShow}}" class="recent">
+			<div class="div-title">
+				<text class="title">最近搜索</text>
+				<text class="clear">清空</text>
+			</div>
+			<div class="div-content">
+				<div class="div-record">
+					<div for="{{record}}">
+						<text class="text-record" onclick="hisSearch($item)">{{$item}}</text>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div if="{{showAssociation}}" class="mallsearch-list">
+			<div for="{{searchlist}}" class="mallsearch-box" onclick="choose($item)">
+				<text class="mallsearch-keyword">{{$item.keyword}}</text>
+				<text class="mallsearch-detail">{{$item.detail}}</text>
+			</div>
+		</div>
+		<searchresult if="{{showResult}}"></searchresult>
+	</div>
+</template>
+
+<style>
+.address-search-img {
+	width: 50px;
+	height: 50px;
+	margin-right: 16.8px;
+  align-items: center;
+}
+.container {
+  flex-direction: column;
+}
+
+.recent {
+  flex-direction: column;
+  margin: 0px 33px 0px 33px;
+  width: 684px;
+}
+
+.div-title {
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 41.1px 0px 29px 0px;
+}
+
+.title {
+  color: #1a1a1a;
+  font-size: 31px;
+}
+
+.clear {
+  color: #ff7500;
+  font-size: 28px;
+}
+
+.div-content {
+  width: 684px;
+}
+
+.div-record {
+  width: 684px;
+  flex-wrap: wrap;
+}
+
+.text-record {
+  padding: 10px 20px 10px 20px;
+  margin: 0px 17px 17px 0px;
+  font-size: 25px;
+  color: #1a1a1a;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+}
+
+.mallsearch-header {
+  margin: 16.5px 33px;
+  align-items: center;
+}
+
+.mallsearch-img {
+  width: 50px;
+  height: 50px;
+  margin: 0px 16.7px 0px 0px;
+}
+
+.mallsearch-input {
+  flex: 1;
+  height: 67px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+.mallsearch-text{
+  padding: 0px 0px 0px 17px;
+  font-size: 27.1px;
+  color: #1a1a1a;
+  width: 100%;
+}
+
+.mallsearch-btn {
+  margin: 0px 0px 0px 17.2px;
+  font-size: 27.1px;
+  line-height: 34.9px;
+  color: #ff7500;
+}
+
+.mallsearch-list {
+  flex-direction: column;
+}
+
+.mallsearch-box {
+  height: 100px;
+  margin: 0px 33px;
+  border-color: #cccccc;
+  border-bottom-width: 0.5px;
+  align-items: center;
+}
+
+.mallsearch-keyword {
+  font-size: 31.3px;
+  color: #ff7500;
+}
+
+.mallsearch-detail {
+  font-size: 31.3px;
+  color: #1a1a1a;
+}
+</style>
+
+<script>
+import router from "@system.router";
+module.exports = {
+  data: {
+    //搜索关键字
+    keyWord: "",
+    //是否显示最近搜索
+    isShow: true,
+    //是否显示搜索联想
+    showAssociation: false,
+    //是否显示搜索结果
+    showResult: false,
+    //输入框默认显示字符
+    placeholder: "隔离防晒霜",
+    //最近搜索记录
+    record: [
+      "连衣裙",
+      "防晒",
+      "隔离霜",
+      "女装连衣裙",
+      "夏装",
+      "女装连衣裙",
+      "夏装"
+    ],
+    //搜索结果列表
+    searchlist: [
+      {
+        keyword: "连衣裙",
+        detail: "女夏 显瘦",
+        id: "4"
+      },
+      {
+        keyword: "连衣裙",
+        detail: "女",
+        id: "5"
+      },
+      {
+        keyword: "连衣裙",
+        detail: "2018新款",
+        id: "6"
+      },
+      {
+        keyword: "连衣裙",
+        detail: "女夏2018新款 韩版",
+        id: "7"
+      }
+    ]
+  },
+  //初始化
+  onInit: function() {
+    this.$page.setTitleBar({
+      menu: false
+    });
+    //从筛选页面返回过来的进入搜索结果页
+    if (this.isresult) {
+      this.isShow = false;
+      this.showAssociation = false;
+      this.showResult = true;
+    }
+    if (this.placeholder === "" || this.placeholder === undefined) {
+      this.placeholder = "搜索栏组件默认字符";
+    }
+  },
+  //删除搜索关键字
+	deleteKey: function() {
+		this.keyWord = '';
+	},
+  //输入关键字联想
+  search: function(e) {
+    this.keyWord = e.value;
+    if (this.keyWord === "") {
+      return;
+    }
+    this.isShow = false;
+    this.showAssociation = true;
+    this.showResult = false;
+    console.log(e.value);
+  },
+  //点击最近搜索的关键字
+  hisSearch: function(text){
+    this.keyWord = text;
+    if (this.keyWord === "") {
+      return;
+    }
+    this.isShow = false;
+    this.showAssociation = true;
+    this.showResult = false;
+  },
+  //点击搜索
+  searchFun: function() {
+    if (this.keyWord === "") {
+      return;
+    }
+    this.isShow = false;
+    this.showAssociation = false;
+    this.showResult = true;
+  },
+  //点击联想搜索
+  choose: function(item) {
+    this.isShow = false;
+    this.showAssociation = false;
+    this.showResult = true;
+  },
+  //返回首页
+  back: function() {
+    router.back();
+  }
+};
+</script>

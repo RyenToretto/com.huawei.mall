@@ -1,0 +1,56 @@
+<import name="order" src="./component/c_orders.ux"></import>
+<template>
+	<!-- template里只能有一个根节点 -->
+	<order datas="{{datass}}"></order>
+</template>
+
+<style>
+
+</style>
+
+<script>
+module.exports = {
+	protected: {
+		datas: '',
+		datass: {
+			address: "开发区九峰三路207号A1栋",//收货地址
+			total_price: 1208,//商品总价格
+			list: [{
+					goods_pic: "./TO_DELETE/find1.png",//商品图片
+					goods_name: "凉鞋",//商品名称
+					goods_numbers: "大码",//商品规格
+					goods_discount: 40,//商品价格
+					number: 4//商品数量
+				},
+				{
+					goods_pic: "./TO_DELETE/find2.png",
+					goods_name: "女士休闲鞋",
+					goods_numbers: "中码",
+					goods_discount: 40.8,
+					number: 1
+				},
+				{
+					goods_pic: "./TO_DELETE/find1.png",
+					goods_name: "凉鞋",
+					goods_numbers: "中码",
+					goods_discount: 40,
+					number: 1
+				},
+				{
+					goods_pic: "./TO_DELETE/find2.png",
+					goods_name: "女士休闲鞋",
+					goods_numbers: "小码",
+					goods_discount: 40,
+					number: 1
+				}
+			]
+		}
+	},
+	//初始化
+	onInit() {
+		if (this.datas) {
+			this.datass = JSON.parse(this.datas);
+		}
+	}
+}
+</script>

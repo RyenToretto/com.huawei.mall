@@ -1,0 +1,330 @@
+<import name="mallbox" src="./component/c_mallbox"></import>
+<template>
+  <div class="screening-content">
+    <text class="screening-price-title">价格区间</text>
+    <div class="screening-price-box">
+      <input class="screening-price-item" placeholder="最低价" maxlength="10"></input>
+      <text class="screening-line">_</text>
+      <input class="screening-price-item" placeholder="最高价" maxlength="10"></input>
+    </div>
+    <!-- 品类 -->
+    <div class="screening-box">
+      <mallbox list="{{category.list}}" title="{{category.title}}"></mallbox>
+    </div>
+    <div class="screening-box">
+      <mallbox list="{{versiontype.list}}" title="{{versiontype.title}}"></mallbox>
+      <mallbox list="{{thickness.list}}" title="{{thickness.title}}"></mallbox>
+      <mallbox list="{{elastic.list}}" title="{{elastic.title}}"></mallbox>
+    </div>
+    <div class="screening-box">
+      <mallbox list="{{season.list}}" title="{{season.title}}"></mallbox>
+    </div>
+    <div class="screening-box">
+      <mallbox list="{{collar.list}}" title="{{collar.title}}"></mallbox>
+      <mallbox list="{{sleeve.list}}" title="{{sleeve.title}}"></mallbox>
+    </div>
+    <div class="screening-box">
+      <mallbox list="{{sleevelength.list}}" title="{{sleevelength.title}}"></mallbox>
+    </div>
+    <div class="screening-btn-box">
+      <text class="screening-btn" onclick="reset">重置</text>
+      <text class="screening-ok-btn" onclick="ok">确认</text>
+    </div>
+  </div>
+</template>
+
+<style>
+  .screening-content {
+    flex-direction: column;
+  }
+
+  .screening-price-title {
+    margin: 36px 0px 36px 33px;
+    font-size: 31.3px;
+    color: #1a1a1a;
+  }
+
+  .screening-price-box {
+    margin: 0px 0px 0px 33px;
+    padding-bottom: 32.8px;
+    border-color: #cccccc;
+    border-bottom-width: 0.5px;
+  }
+
+  .screening-price-item {
+    width: 208.3px;
+    height: 66.7px;
+    padding: 15px 0px 15px 10px;
+    border-radius: 8.3px;
+    background-color: #f2f2f2;
+    font-size: 27.1px;
+    color: #1a1a1a;
+  }
+
+  .screening-line {
+    margin: 0px 25px;
+  }
+
+  .screening-box {
+    flex-direction: column;
+    margin: 0px 33px;
+    border-color: #cccccc;
+    border-bottom-width: 0.5px;
+  }
+
+  .screening-btn-box {
+    margin: 36px 33px 0px 33px;
+    align-items: center;
+  }
+
+  .screening-btn {
+    padding: 11.85px 134px;
+    margin: 0px 16.7px 0px 0px;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-width: 1px;
+    border-radius: 8.3px;
+    color: #1a1a1a;
+    font-size: 31.3px;
+  }
+
+  .screening-ok-btn {
+    padding: 11.85px 134px;
+    border: 1px solid #ff7500;
+    border-radius: 8.3px;
+    background-color: #ff7500;
+    color: #ffffff;
+    font-size: 31.3px;
+  }
+</style>
+
+<script>
+  import router from "@system.router";
+  module.exports = {
+    data: {
+      //品类
+      category: {
+        title: "品类",
+        list: [
+          {
+            title: "T恤",
+            ischoosed: false
+          },
+          {
+            title: "牛仔裤",
+            ischoosed: false
+          },
+          {
+            title: "连衣裙",
+            ischoosed: false
+          },
+          {
+            title: "衬衫",
+            ischoosed: false
+          },
+          {
+            title: "半身裙",
+            ischoosed: false
+          },
+          {
+            title: "套装",
+            ischoosed: false
+          },
+          {
+            title: "外套",
+            ischoosed: false
+          }
+        ]
+      },
+      //版型
+      versiontype: {
+        title: "版型",
+        list: [
+          {
+            title: "O型",
+            ischoosed: false
+          },
+          {
+            title: "X型",
+            ischoosed: false
+          },
+          {
+            title: "A型",
+            ischoosed: false
+          },
+          {
+            title: "T型",
+            ischoosed: false
+          }
+        ]
+      },
+      //厚薄
+      thickness: {
+        title: "厚薄",
+        list: [
+          {
+            title: "薄",
+            ischoosed: false
+          },
+          {
+            title: "中等",
+            ischoosed: false
+          },
+          {
+            title: "厚",
+            ischoosed: false
+          }
+        ]
+      },
+      //弹性
+      elastic: {
+        title: "弹性",
+        list: [
+          {
+            title: "强",
+            ischoosed: false
+          },
+          {
+            title: "一般",
+            ischoosed: false
+          },
+          {
+            title: "弱",
+            ischoosed: false
+          }
+        ]
+      },
+      //适用季节
+      season: {
+        title: "适用季节",
+        list: [
+          {
+            title: "春天",
+            ischoosed: false
+          },
+          {
+            title: "夏天",
+            ischoosed: false
+          },
+          {
+            title: "秋天",
+            ischoosed: false
+          },
+          {
+            title: "冬天",
+            ischoosed: false
+          }
+        ]
+      },
+      //领型
+      collar: {
+        title: "领型",
+        list: [
+          {
+            title: "高领",
+            ischoosed: false
+          },
+          {
+            title: "中领",
+            ischoosed: false
+          },
+          {
+            title: "低领",
+            ischoosed: false
+          }
+        ]
+      },
+      //袖型
+      sleeve: {
+        title: "袖型",
+        list: [
+          {
+            title: "圆袖型",
+            ischoosed: false
+          },
+          {
+            title: "非圆袖型",
+            ischoosed: false
+          }
+        ]
+      },
+      //袖长
+      sleevelength: {
+        title: "袖长",
+        list: [
+          {
+            title: "长",
+            ischoosed: false
+          },
+          {
+            title: "短",
+            ischoosed: false
+          },
+          {
+            title: "中长",
+            ischoosed: false
+          }
+        ]
+      }
+    },
+    //初始化
+    onInit() {
+      this.$page.setTitleBar({
+        text: '筛选',
+        textColor: '#1a1a1a',
+        backgroundColor: '#f2f2f2',
+        menu: false
+      })
+    },
+    //重置
+    reset: function () {
+      this.sleevelength.list.forEach(element => {
+        if (element.ischoosed) {
+          element.ischoosed = false;
+        }
+      });
+      this.sleeve.list.forEach(element => {
+        if (element.ischoosed) {
+          element.ischoosed = false;
+        }
+      });
+      this.collar.list.forEach(element => {
+        if (element.ischoosed) {
+          element.ischoosed = false;
+        }
+      });
+      this.season.list.forEach(element => {
+        if (element.ischoosed) {
+          element.ischoosed = false;
+        }
+      });
+      this.elastic.list.forEach(element => {
+        if (element.ischoosed) {
+          element.ischoosed = false;
+        }
+      });
+      this.thickness.list.forEach(element => {
+        if (element.ischoosed) {
+          element.ischoosed = false;
+        }
+      });
+     
+      this.versiontype.list.forEach(element => {
+        if (element.ischoosed) {
+          element.ischoosed = false;
+        }
+      });
+      this.category.list.forEach(element => {
+        if (element.ischoosed) {
+          element.ischoosed = false;
+        }
+      });
+    },
+    //确认
+    ok: function () {
+      router.push({
+        uri: "Page_RecentSearch",
+        params: { isresult: true }
+      });
+    }
+  };
+</script>

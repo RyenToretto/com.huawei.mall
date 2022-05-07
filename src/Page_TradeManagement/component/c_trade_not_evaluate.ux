@@ -1,0 +1,253 @@
+<template>
+	<list class="goos_container">
+		<list-item type="listItem" for="{{list}}" class="goos_lists">
+
+			<div class="space_between align_items_center">
+				<div class="time_clock flex_row ">
+					<image class="clock_image" src="../img/clock.png"></image>
+					<text class="goods_time">2018-11-28 17:15:20</text>
+				</div>
+			</div>
+
+			<div onclick="goToPage($item)" class="sigle_goos_list">
+
+				<div class="image_contaner">
+					<image class="goods_image" src="{{$item.image}}"></image>
+				</div>
+
+				<div class="goods_description flex_row">
+					<div class="title_size flex_column">
+						<text class="goods_title">{{$item.title}}</text>
+						<text class="goods_size">{{$item.size}}</text>
+					</div>
+
+					<div class="money_amount  flex_column">
+						<text class="goods_money">￥{{$item.money}}</text>
+						<text class="goods_amount"> X {{$item.amount}}</text>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="separate_line"></div>
+
+			<div class="bottom_amount_money">
+				<text class="_amount">共1件商品</text>
+				<text class="need_pay" if="{{$item.state == 1}}"> 需付款 ：</text>
+				<text class="need_pay" if="{{$item.state == 3 || $item.state == 4 || $item.state == 2}}"> 实付款 ：</text>
+				<text class="_money">￥{{$item.money}}</text>
+			</div>
+			<div class="state_btn">
+				<text class="_btn" onclick="ok()">去评价</text>
+			</div>
+
+			<div show="{{$idx !== list.length-1}}" class="separate"></div>
+		</list-item>
+	</list>
+</template>
+
+<style>
+	.goos_container {
+		flex-direction: column;
+		padding-bottom: 50px;
+	}
+
+	.goos_lists {
+		flex-direction: column;
+	}
+
+	.time_clock {
+		margin-top: 38px;
+		margin-bottom: 24px;
+		margin-left: 33px;
+		align-items: center;
+	}
+
+	.goods_time {
+		font-size: 25px;
+		color: #1a1a1a;
+		opacity: 0.5;
+	}
+
+	.clock_image {
+		width: 33.3px;
+		height: 33.3px;
+		margin-right: 10px;
+	}
+
+	._state {
+		margin-right: 33px;
+	}
+
+	.delete_image {
+		width: 50px;
+		height: 50px;
+		margin-top: 15px;
+		margin-left: 15.9px;
+	}
+
+	.sigle_goos_list {
+		padding-bottom: 26px;
+	}
+
+	.image_contaner {
+		width: 133.3px;
+		height: 133.3px;
+		margin: 0 33px 0 33px;
+	}
+
+	.goods_image {
+		width: 133.3px;
+		height: 133.3px;
+		border-radius: 8px;
+	}
+
+	.goods_description {
+		width: 75%;
+	}
+
+	.title_size {
+		width: 85%;
+	}
+
+	.goods_title {
+		color: #1a1a1a;
+		font-size: 28px;
+		line-height: 40.6px;
+		margin-bottom: 26.6px;
+	}
+
+	.goods_size {
+		color: #1A1A1A;
+		opacity: 0.5;
+		font-size: 21px;
+	}
+
+	.money_amount {
+		width: 15%;
+		margin-right: 33px;
+	}
+
+	.goods_money {
+		width: 100%;
+		font-size: 27px;
+		text-align: right;
+
+	}
+
+	.goods_amount {
+		width: 100%;
+		color: #1A1A1A;
+		opacity: 0.5;
+		font-size: 21px;
+		align-self: center;
+		text-align: right;
+	}
+
+	.separate_line {
+		margin-left: 33px;
+		margin-right: 33px;
+		border-bottom-width: 0.5px;
+		border-color: rgba(0, 0, 0, 0.2);
+	}
+
+	.bottom_amount_money {
+		width: 100%;
+		justify-content: flex-end;
+		margin-top: 30px;
+	}
+
+	._amount {
+		margin-right: 10px;
+		font-size: 25px;
+		color: #1a1a1a;
+		opacity: 0.5;
+	}
+
+	.need_pay {
+		color: #1a1a1a;
+		font-size: 28px;
+	}
+
+	._money {
+		color: #fa2a2d;
+		font-size: 31px;
+		margin-right: 33px;
+	}
+
+	.state_btn {
+		justify-content: flex-end;
+		margin-top: 32.7px;
+		margin-right: 33px;
+	}
+
+	._btn {
+		width: 153px;
+		height: 58px;
+		text-align: center;
+		color: #ff7500;
+		font-size: 28px;
+		border-width: 3px;
+		border-color: #ff7500;
+		border-radius: 6px;
+	}
+
+	.separate {
+		height: 16.7px;
+		background-color: #000000;
+		opacity: 0.05;
+		margin-top: 23.3px;
+		margin-left: -33px;
+		margin-right: -33px;
+	}
+
+	.align_items_center {
+		align-items: center;
+	}
+
+	.justify_content_center {
+		justify-content: center;
+	}
+
+	.flex_column {
+		flex-direction: column;
+	}
+
+	.flex_row {
+		flex-direction: row;
+	}
+
+	.flex_end {
+		justify-content: flex-end;
+	}
+
+	.space_between {
+		justify-content: space-between;
+	}
+</style>
+
+<script>
+	import router from '@system.router';
+	export default {
+		data: {
+			props: [
+				'list',
+			]
+		},
+
+		onInit() {
+
+		},
+		goToPage(item) {
+			router.push({
+				uri: '/Page_MallDetail',
+				params: { item: item }
+			})
+		},
+		ok() {
+			router.push({
+				uri: '/Page_Evaluate'
+			})
+		}
+	}
+</script>

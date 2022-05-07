@@ -1,0 +1,65 @@
+<template>
+  <div class="verticallist-box" onclick="detail(list)">
+    <image class="verticallist-img" src="{{list.icon}}"></image>
+    <div class="verticallist-text">
+      <text class="verticallist-title">{{list.title}}</text>
+      <div>
+        <text class="verticallist-sub-title">{{list.price}}</text>
+        <text class="verticallist-old">原价{{list.oldPrice}}</text>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style>
+  .verticallist-box {
+    padding: 17px 0px 33px 0px;
+    border-color: #cccccc;
+    border-bottom-width: 0.5px;
+    align-items: center;
+  }
+
+  .verticallist-text {
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .verticallist-title {
+    padding-bottom: 14px;
+    color: #1a1a1a;
+    font-size: 27.1px;
+  }
+
+  .verticallist-sub-title {
+    color: #fa2a2d;
+    font-size: 20.8px;
+  }
+
+  .verticallist-img {
+    height: 133px;
+    width: 133px;
+    border-radius: 8px;
+    margin-right: 33px;
+  }
+
+  .verticallist-old {
+    color: #8d8d8d;
+    font-size: 20.8px;
+    margin: 0px 0px 0px 10px;
+    text-decoration: line-through;
+  }
+</style>
+
+<script>
+  import router from "@system.router";
+  module.exports = {
+    props: ["list"],
+    detail: function (item) {
+      //进入搜索页面
+      router.push({
+        uri: "Page_RecentSearch",
+        params: { isresult: true }
+      });
+    }
+  };
+</script>

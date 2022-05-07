@@ -1,0 +1,173 @@
+<import name="usercard" src="./component/c_user_card"></import>
+<import name="usercardnologin" src="./component/c_user_card_no_login"></import>
+<import name="fastentry" src="./component/c_fastEntry"></import>
+<import name="set" src="./component/c_set"></import>
+<template>
+	<!-- template里只能有一个根节点 -->
+	<list class="user-container">
+		<list-item type="listItem1" class="user-top">
+			<block if="{{loginstatus}}">
+				<usercard userinfo="{{userCard.userInfo}}" expand="{{userCard.expand}}"></usercard>
+			</block>
+			<block if="{{!loginstatus}}">
+				<usercardnologin content="{{userCard.userCardNoLogin}}"></usercardnologin>
+			</block>
+		</list-item>
+		<list-item type="listItem2">
+			<fastentry list="{{fastentrylist}}"></fastentry>
+		</list-item>
+		<list-item type="listItem3">
+			<div class="malluser-box">
+				<text class="malluser-icon"></text><text class="malluser-title">如需联络客服，请访问“***”公众号</text>
+			</div>
+		</list-item>
+		<list-item type="listItem4">
+			<div class="malldetail-black"></div>
+		</list-item>
+		<list-item type="listItem5">
+			<set list="{{setlist2}}"></set>
+		</list-item>
+	</list>
+</template>
+
+<style>
+	.user-container {
+		width: 750px;
+		flex-direction: column;
+	}
+
+	.user-top {
+		flex-direction: column;
+		justify-content: center;
+		align-content: center;
+		align-items: center;
+		margin: 33px 0px 66.7px 0px;
+		width: 100%;
+	}
+
+	.malluser-box {
+		height: 100px;
+		width: 100%;
+		margin: 37px 0px 0px 0px;
+		background-color: #f3f3f3;
+		padding: 0px 33px;
+		align-items: center;
+	}
+
+	.malluser-icon {
+		width: 16.7px;
+		height: 16.7px;
+		margin-right: 16.7px;
+		background-color: #ff7500;
+		border-radius: 16.7px;
+	}
+
+	.malluser-title {
+		font-size: 31px;
+		color: #1a1a1a;
+	}
+
+	.malldetail-black {
+		height: 17px;
+		background-color: #f2f2f2;
+	}
+</style>
+
+<script>
+	module.exports = {
+		data: {
+			title: '用户界面',
+			loginstatus: true,
+			//登陆成功卡片的信息
+			userCard: {
+				userInfo: {
+					portrait: "./Page_User/TO_DELETE/login_avatar.png",
+					username: "Jiaqi"
+				},
+				//未登录卡片的信息
+				userCardNoLogin: {
+					portrait: "./Page_User/img/nologin_avatar.png",
+					title: "登陆华为账户",
+					subTitle: "大波红包等你拿xxxx"
+				},
+				expand: [{
+						number: 12,
+						name: "优惠券"
+					},
+					{
+						number: 34,
+						name: "*币"
+					},
+					{
+						number: 56.00,
+						name: "零钱"
+					}
+				]
+			},
+			//快捷入口数据
+			fastentrylist: [{
+					'icon': './Page_User/img/icon4.png',
+					'title': '全部订单',
+					'src': 'news',
+					'state': 0,
+					'isNew': false
+				},
+				{
+					'icon': './Page_User/img/icon1.png',
+					'title': '待付款',
+					'src': 'sign',
+					'state': 1,
+					'isNew': false
+				},
+				{
+					'icon': './Page_User/img/icon21.png',
+					'title': '待收货',
+					'src': 'recharge',
+					'state': 2,
+					'isNew': false
+				},
+				{
+					'icon': './Page_User/img/icon2.png',
+					'title': '待评价',
+					'src': 'gift',
+					'state': 3,
+					'isNew': false
+				},
+				{
+					'icon': './Page_User/img/icon3.png',
+					'title': "已完成",
+					'src': 'activities',
+					'state': 4,
+					'isNew': false
+				},
+
+			],
+			setlist2: [{
+					'title': '地址管理',
+					'subTitle': '',
+					'src': 'Page_SelectReceiveAdd'
+				},
+				{
+					'title': '账号管理',
+					'subTitle': '',
+					'src': 'Page_Account'
+				},
+				{
+					'title': '客服',
+					'subTitle': '',
+					'src': 'money'
+				},
+				{
+					'title': '关于',
+					'subTitle': '',
+					'src': 'Page_About'
+				}
+			]
+		},
+		onInit() {
+			this.$page.setTitleBar({
+				menu: false
+			})
+		},
+	}
+</script>
